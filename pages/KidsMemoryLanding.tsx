@@ -65,6 +65,14 @@ const KidsMemoryLanding: React.FC = () => {
     setShowExitPopup(false);
   };
 
+  const scrollToOffer = () => {
+    const offerElement = document.getElementById('offer-stack');
+    if (offerElement) {
+      offerElement.scrollIntoView({ behavior: 'smooth' });
+      setShowExitPopup(false);
+    }
+  };
+
   const faqs = [
     {
       question: "ولدي عمرو صغير، واش غادي يفهم؟",
@@ -139,12 +147,12 @@ const KidsMemoryLanding: React.FC = () => {
 
       {/* Sticky CTA Mobile */}
       {showStickyCTA && (
-        <div className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 shadow-[0_-10px_20px_rgba(0,0,0,0.05)] z-40 animate-fade-in-up">
+        <div className="md:hidden fixed bottom-6 left-4 right-4 z-40 animate-fade-in-up">
           <button 
             onClick={openModal}
-            className="w-full bg-[#22C55E] text-white font-bold py-4 rounded-xl text-lg shadow-lg"
+            className="w-full bg-[#22C55E] text-white font-bold py-4 rounded-2xl text-xl shadow-[0_10px_25px_rgba(34,197,94,0.5)] border-2 border-white/20"
           >
-            سجّل دابا — 400 درهم
+            احجز مقعد طفلك الآن
           </button>
         </div>
       )}
@@ -205,10 +213,10 @@ const KidsMemoryLanding: React.FC = () => {
           
           <div className="flex flex-col items-center gap-4">
             <button 
-              onClick={openModal}
+              onClick={scrollToOffer}
               className="bg-[#22C55E] hover:bg-green-600 text-white text-2xl font-bold py-5 px-10 rounded-2xl shadow-xl hover:shadow-green-500/40 transition-all transform hover:-translate-y-1 w-full md:w-auto"
             >
-              سجّل ولدك دابا — 400 درهم غير
+              نعم، أريد تفوق ولدي — 400 درهم
             </button>
             <div className="flex items-center gap-6 text-gray-500 font-medium text-sm md:text-base">
               <span className="flex items-center gap-1"><ShieldCheck size={18} className="text-[#22C55E]"/> ضمان استرجاع الفلوس</span>
@@ -545,7 +553,7 @@ const KidsMemoryLanding: React.FC = () => {
       </section>
 
       {/* 8. Offer Stack */}
-      <section className="py-20 px-4 bg-[#DCFCE7]">
+      <section id="offer-stack" className="py-20 px-4 bg-[#DCFCE7]">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center text-dark-blue">شنو غادي تاخد مقابل 400 درهم؟</h2>
           
@@ -593,15 +601,19 @@ const KidsMemoryLanding: React.FC = () => {
               </li>
             </ul>
             
-            <div className="border-t-2 border-dashed border-gray-200 pt-8 pb-6 text-center">
+            <div className="border-t-2 border-dashed border-gray-200 pt-8 pb-6 text-center mb-8">
               <p className="text-xl text-gray-500 mb-2">المجموع الحقيقي: <span className="line-through">1050 درهم</span></p>
               <p className="text-3xl md:text-4xl font-black text-dark-blue">نتا غادي تخلص: <span className="text-[#22C55E]">400 درهم فقط</span></p>
             </div>
             
-            <div className="bg-gray-50 rounded-xl p-4 text-center mb-8">
-              <p className="text-gray-600 font-medium">
-                400 ÷ 4 حصص = <span className="font-bold text-dark-blue">100 درهم للحصة</span> — أقل من ثمن وجبة فماكدونالدز!
-              </p>
+            <div className="bg-orange-50 border border-orange-200 rounded-2xl p-6 mb-8 flex items-start gap-4">
+              <ShieldCheck className="text-orange-500 flex-shrink-0 mt-1" size={32} />
+              <div>
+                <h4 className="text-xl font-bold text-gray-900 mb-2">ضمان استرجاع الأموال 100%</h4>
+                <p className="text-gray-700 leading-relaxed">
+                  إلى ما لاحظتيش فرق فمستوى ولدك بعد الحصة الأولى، غادي نرجعو ليك فلوسك كاملة بلا ما نسولوك حتى سؤال. المخاطرة علينا حنا، ماشي عليك!
+                </p>
+              </div>
             </div>
             
             <button 
@@ -792,7 +804,7 @@ const KidsMemoryLanding: React.FC = () => {
             onClick={openModal}
             className="w-full md:w-auto bg-[#22C55E] hover:bg-green-600 text-white text-2xl font-bold py-5 px-12 rounded-2xl shadow-[0_0_30px_rgba(34,197,94,0.4)] hover:shadow-[0_0_40px_rgba(34,197,94,0.6)] transition-all transform hover:-translate-y-1"
           >
-            سجّل ولدك دابا
+            أريد أن أرى هذه النتائج على ولدي
           </button>
         </div>
       </section>
@@ -808,7 +820,7 @@ const KidsMemoryLanding: React.FC = () => {
             onClick={openModal}
             className="w-full md:w-auto bg-[#22C55E] hover:bg-green-600 text-white text-2xl font-bold py-5 px-12 rounded-2xl shadow-[0_0_30px_rgba(34,197,94,0.4)] hover:shadow-[0_0_40px_rgba(34,197,94,0.6)] transition-all transform hover:-translate-y-1"
           >
-            سجّل ولدك دابا
+            نعم، أريد هذا البرنامج لطفلي
           </button>
         </div>
       </section>

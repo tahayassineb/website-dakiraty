@@ -47,26 +47,28 @@ export default function OnboardingModal({ isOpen, onClose }: OnboardingModalProp
         (window as any).fbq('track', 'Lead');
       }
       
-      alert('شكراً على التسجيل! 🎉\nغادي نتواصل معاك فأقرب وقت.');
-      onClose();
-      // Reset form
-      setTimeout(() => {
-        setStep(0);
-        setFormData({
-          parentName: '',
-          whatsapp: '',
-          childName: '',
-          childAge: '',
-          problem: '',
-          contactMethod: ''
-        });
-      }, 500);
+      setStep(6);
     } catch (error) {
       console.error('Error submitting form:', error);
       alert('وقع شي مشكل، عاود حاول مرة أخرى.');
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleCloseAndReset = () => {
+    onClose();
+    setTimeout(() => {
+      setStep(0);
+      setFormData({
+        parentName: '',
+        whatsapp: '',
+        childName: '',
+        childAge: '',
+        problem: '',
+        contactMethod: ''
+      });
+    }, 300);
   };
 
   const renderStep = () => {
@@ -223,6 +225,25 @@ export default function OnboardingModal({ isOpen, onClose }: OnboardingModalProp
             </div>
           </div>
         );
+      case 6:
+        return (
+          <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500 text-center">
+            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Check size={40} className="text-green-500" />
+            </div>
+            <h3 className="text-3xl font-bold text-dark-blue">تم التسجيل بنجاح! 🎉</h3>
+            <p className="text-xl text-gray-600 leading-relaxed">
+              شكراً سي/للا {formData.parentName}.<br/>
+              الفريق ديالنا غادي يتواصل معاك فأقرب وقت باش نحددو موعد الاستشارة.
+            </p>
+            <button
+              onClick={handleCloseAndReset}
+              className="w-full bg-[#3B82F6] hover:bg-blue-600 text-white text-xl font-bold py-4 rounded-xl shadow-lg transition-all mt-8"
+            >
+              إغلاق
+            </button>
+          </div>
+        );
       default:
         return null;
     }
@@ -235,20 +256,20 @@ export default function OnboardingModal({ isOpen, onClose }: OnboardingModalProp
         <div className="h-2 w-full bg-gray-100">
           <div 
             className="h-full bg-[#3B82F6] transition-all duration-500 ease-out"
-            style={{ width: `${((step + 1) / 6) * 100}%` }}
+            style={{ width: `${step === 6 ? 100 : ((step + 1) / 6) * 100}%` }}
           />
         </div>
 
         {/* Close Button */}
         <button 
-          onClick={onClose}
+          onClick={step === 6 ? handleCloseAndReset : onClose}
           className="absolute top-6 left-6 text-gray-400 hover:text-gray-600 bg-gray-100 hover:bg-gray-200 p-2 rounded-full transition-colors z-10"
         >
           <X size={20} />
         </button>
 
         {/* Back Button */}
-        {step > 0 && (
+        {step > 0 && step < 6 && (
           <button 
             onClick={handleBack}
             className="absolute top-6 right-6 text-gray-500 hover:text-gray-800 font-medium transition-colors z-10 flex items-center gap-1"

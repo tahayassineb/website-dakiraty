@@ -97,7 +97,7 @@ const Home: React.FC = () => {
                 <div className="w-24 h-1.5 bg-accent-yellow mx-auto rounded-full"></div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
                 {/* CARD 1: DAKIRATY */}
                 <div className="bg-white rounded-[2rem] p-8 md:p-10 shadow-xl border border-gray-100 hover:border-primary-blue/30 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group">
                     <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-primary-blue mb-8 group-hover:scale-110 transition-transform duration-300">
@@ -135,6 +135,26 @@ const Home: React.FC = () => {
                     </div>
                     <Link to="/quran" onMouseEnter={() => prefetchRoute('/quran')} className="block w-full bg-green-600 text-white hover:bg-green-700 font-bold py-4 rounded-xl text-center shadow-lg hover:shadow-green-600/30 transition-all">
                         ابدأ رحلة الحفظ
+                    </Link>
+                </div>
+
+                {/* CARD 3: KIDS MEMORY */}
+                <div className="bg-white rounded-[2rem] p-8 md:p-10 shadow-xl border border-gray-100 hover:border-orange-500/30 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 group">
+                    <div className="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center text-orange-500 mb-8 group-hover:scale-110 transition-transform duration-300">
+                        <Sparkles size={36} />
+                    </div>
+                    <h3 className="text-2xl font-bold text-dark-blue mb-4 group-hover:text-orange-600 transition-colors">برنامج الذاكرة للأطفال</h3>
+                    <p className="text-gray-500 font-medium mb-6 min-h-[56px]">
+                        "هل يعاني طفلك من النسيان السريع أو صعوبة في التركيز أثناء الدراسة؟"
+                    </p>
+                    <div className="bg-gray-50 rounded-xl p-5 mb-8 border border-gray-100">
+                        <h4 className="text-sm font-bold text-gray-400 uppercase mb-2">الوعد:</h4>
+                        <p className="text-gray-800 font-bold leading-relaxed">
+                            تقنيات ممتعة تجعل طفلك يحفظ دروسه بسرعة، يركز أكثر، ويتفوق في دراسته.
+                        </p>
+                    </div>
+                    <Link to="/kids-memory" className="block w-full bg-orange-500 text-white hover:bg-orange-600 font-bold py-4 rounded-xl text-center shadow-lg hover:shadow-orange-500/30 transition-all">
+                        سجّل طفلك الآن
                     </Link>
                 </div>
             </div>
