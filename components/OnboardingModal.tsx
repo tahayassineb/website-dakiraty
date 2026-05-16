@@ -45,7 +45,7 @@ export default function OnboardingModal({ isOpen, onClose }: OnboardingModalProp
     const fbp = getCookie('_fbp');
     const fbc = getCookie('_fbc');
     const eventId = `lead_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
-    const intakeUrl = import.meta.env.VITE_LEAD_INTAKE_URL?.trim() || 'https://useful-hound-287.eu-west-1.convex.site/intake/website';
+    const intakeUrl = import.meta.env.VITE_LEAD_INTAKE_URL?.trim() || 'https://adjoining-bee-105.eu-west-1.convex.site/intake/website';
 
     try {
       await fetch(intakeUrl, {

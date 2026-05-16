@@ -468,7 +468,7 @@ const Offer: React.FC = () => {
 
         const fbp = getCookie('_fbp');
         const fbc = getCookie('_fbc');
-        const intakeUrl = import.meta.env.VITE_LEAD_INTAKE_URL?.trim() || 'https://useful-hound-287.eu-west-1.convex.site/intake/website';
+        const intakeUrl = import.meta.env.VITE_LEAD_INTAKE_URL?.trim() || 'https://adjoining-bee-105.eu-west-1.convex.site/intake/website';
         
         try {
             const response = await fetch(intakeUrl, {
