@@ -103,8 +103,9 @@ const ProgramDetails: React.FC<ProgramDetailsProps> = ({ type }) => {
     
     setStatus('submitting');
 
+    const intakeOverride = import.meta.env.VITE_LEAD_INTAKE_URL?.trim();
     const webhookUrl = type === 'quran' 
-        ? 'https://n8n.srv1041616.hstgr.cloud/webhook/3e8f8f74-a09d-4175-b556-406519e19a08' 
+        ? intakeOverride || 'https://useful-hound-287.eu-west-1.convex.site/intake/website' 
         : ''; // Fallback if needed for other types
 
     if (!webhookUrl) {
