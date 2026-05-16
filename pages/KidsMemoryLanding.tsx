@@ -25,6 +25,33 @@ const KidsMemoryLanding: React.FC = () => {
       setShowSplash(false);
     }
 
+    // Inject Meta Pixel
+    if (typeof window !== 'undefined') {
+      const w = window as any;
+      if (!w.fbq) {
+        let n: any;
+        n = w.fbq = function() {
+            // eslint-disable-next-line prefer-rest-params
+            n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+        };
+        if (!w._fbq) w._fbq = n;
+        n.push = n;
+        n.loaded = true;
+        n.version = '2.0';
+        n.queue = [];
+        const t = document.createElement('script');
+        t.async = true;
+        t.src = 'https://connect.facebook.net/en_US/fbevents.js';
+        const s = document.getElementsByTagName('script')[0];
+        if (s && s.parentNode) {
+            s.parentNode.insertBefore(t, s);
+        }
+      }
+      
+      (window as any).fbq('init', '1435549911489261');
+      (window as any).fbq('track', 'PageView');
+    }
+
     const handleScroll = () => {
       const totalScroll = document.documentElement.scrollTop;
       const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -75,32 +102,32 @@ const KidsMemoryLanding: React.FC = () => {
 
   const faqs = [
     {
-      question: "ولدي عمرو صغير، واش غادي يفهم؟",
-      answer: "الدورة مناسبة للأطفال من 7 سنين فما فوق. التقنيات مبسّطة ومشروحة بطريقة يفهمها أي طفل. وأنا كنتأكد أن كل واحد فاهم قبل ما نزيد."
+      question: "طفلي صغير في السن، هل سيستوعب الدورة؟",
+      answer: "الدورة مناسبة للأطفال من سن 7 سنوات فما فوق. التقنيات مبسطة ومشروحة بطريقة يفهمها أي طفل. وأنا أحرص على أن يفهم الجميع قبل الانتقال للخطوة التالية."
     },
     {
-      question: "ولدي ما كيركّزش، كيملّ بسرعة.",
-      answer: "هادي مشكلة الطريقة القديمة، ماشي مشكلة ولدك. التقنيات اللي كنعلّم مبنية على اللعب والخيال. الأطفال كيستمتعو وكيتفاعلو."
+      question: "طفلي لا يركز، ويشعر بالملل بسرعة.",
+      answer: "هذه مشكلة الطريقة التقليدية، وليست مشكلة طفلك. التقنيات التي أعلمها تعتمد على اللعب والخيال. الأطفال يستمتعون ويتفاعلون بشكل كبير."
     },
     {
-      question: "الحصص أونلاين، واش غادي تنفع؟",
-      answer: "الحصص مباشرة لايڤ — ماشي فيديوهات مسجلة. كنشوف ولدك، كيسولني، كنجاوبو فالحين. بحال إلى جا عندي للدار. وتقدر تحضر معاه وتراقب بنفسك."
+      question: "الحصص عبر الإنترنت، هل ستكون فعالة؟",
+      answer: "الحصص مباشرة وتفاعلية — وليست فيديوهات مسجلة. أرى طفلك، يسألني، وأجيبه في الحين. وكأنه يحضر معي شخصياً. ويمكنك الحضور معه والمراقبة بنفسك."
     },
     {
-      question: "شحال من مرة فالأسبوع؟",
-      answer: "حصة وحدة فالأسبوع. المدة: ساعة إلى ساعة ونصف. يعني فشهر واحد، ولدك غادي يكون تعلّم كولشي."
+      question: "كم مرة في الأسبوع؟",
+      answer: "4 حصص في الأسبوع. المدة: من ساعة إلى ساعة ونصف. مما يعني أنه في أسبوع واحد، سيكون طفلك قد تعلم كل شيء."
     },
     {
-      question: "إلى ما عجبناش الدورة؟",
-      answer: "إلى حضر ولدك الحصة الأولى وما عجبتوش، رد ليك فلوسك كاملين. بلا أي سؤال."
+      question: "ماذا لو لم تعجبنا الدورة؟",
+      answer: "إذا حضر طفلك الحصة الأولى ولم تعجبه، سنعيد لك أموالك بالكامل. بدون أي أسئلة."
     },
     {
-      question: "أنا كوالد نقدر نحضر؟",
-      answer: "أكيد! بل كنشجّع على هادشي. تشوف كيفاش ولدك كيتعلم، وتستافد حتى نتا من التقنيات."
+      question: "هل يمكنني كولي أمر أن أحضر؟",
+      answer: "بالتأكيد! بل أشجع على ذلك. لترى كيف يتعلم طفلك، وتستفيد أنت أيضاً من التقنيات."
     },
     {
-      question: "كيفاش ندفع؟",
-      answer: "بعد ما تسجّل، غادي نتواصل معاك على واتساب ونشرح ليك طرق الدفع المتاحة."
+      question: "كيف يمكنني الدفع؟",
+      answer: "بعد التسجيل، سنتواصل معك عبر الواتساب ونشرح لك طرق الدفع المتاحة."
     }
   ];
 
@@ -119,8 +146,8 @@ const KidsMemoryLanding: React.FC = () => {
       {showSplash && (
         <div className="fixed inset-0 z-[100] bg-white/95 backdrop-blur-md flex flex-col items-center justify-center p-4 transition-opacity duration-500">
           <div className="bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full text-center border border-gray-100">
-            <h2 className="text-3xl font-bold mb-2">أهلاً بيك 👋</h2>
-            <p className="text-xl text-gray-600 mb-8 font-medium">شكون نتا/نتي؟</p>
+            <h2 className="text-3xl font-bold mb-2">أهلاً بك 👋</h2>
+            <p className="text-xl text-gray-600 mb-8 font-medium">من أنت؟</p>
             
             <div className="flex flex-col gap-4">
               <button 
@@ -140,7 +167,7 @@ const KidsMemoryLanding: React.FC = () => {
               </button>
             </div>
             
-            <p className="text-sm text-gray-400 mt-6">باش نعطيوك تجربة مناسبة ليك</p>
+            <p className="text-sm text-gray-400 mt-6">لنقدم لك تجربة مناسبة</p>
           </div>
         </div>
       )}
@@ -152,7 +179,7 @@ const KidsMemoryLanding: React.FC = () => {
             onClick={openModal}
             className="w-full bg-[#22C55E] text-white font-bold py-4 rounded-2xl text-xl shadow-[0_10px_25px_rgba(34,197,94,0.5)] border-2 border-white/20"
           >
-            احجز مقعد طفلك الآن
+            سجل طفلك الآن
           </button>
         </div>
       )}
@@ -172,9 +199,9 @@ const KidsMemoryLanding: React.FC = () => {
               <div className="w-16 h-16 bg-orange-100 text-orange-500 rounded-full flex items-center justify-center mx-auto mb-6">
                 <MessageCircle size={32} />
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-dark-blue">مستني شي حاجة؟</h3>
+              <h3 className="text-2xl font-bold mb-4 text-dark-blue">هل تنتظر شيئاً؟</h3>
               <p className="text-gray-600 mb-8 text-lg">
-                إلى عندك أي سؤال أو استفسار على الدورة، راسلنا على واتساب وغادي نجاوبوك فالحين.
+                إذا كان لديك أي سؤال أو استفسار حول الدورة، راسلنا على واتساب وسنجيبك فوراً.
               </p>
               
               <a 
@@ -191,7 +218,7 @@ const KidsMemoryLanding: React.FC = () => {
                 onClick={() => setShowExitPopup(false)}
                 className="mt-4 text-gray-500 hover:text-gray-700 underline text-sm"
               >
-                لا شكراً، بغيت نرجع للصفحة
+                لا شكراً، أريد العودة للصفحة
               </button>
             </div>
           </div>
@@ -202,13 +229,13 @@ const KidsMemoryLanding: React.FC = () => {
       <section className="pt-32 pb-20 px-4 min-h-[85vh] flex items-center bg-gradient-to-b from-blue-50 to-[#F9FAFB]">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight mb-6 text-dark-blue">
-            ولدك ما عندوش مشكل فالذاكرة.<br/>
-            <span className="text-[#F97316]">عندو مشكل فالطريقة.</span>
+            طفلك ليس لديه مشكلة في الذاكرة.<br/>
+            <span className="text-[#F97316]">لديه مشكلة في الطريقة.</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-600 mb-10 leading-relaxed max-w-3xl mx-auto font-medium">
-            فـ 4 حصص غير، غادي يتعلم كيفاش يحفظ بحال أبطال الذاكرة — 
-            جدول الضرب، القرآن، الاجتماعيات... بلا "عاود عاود عاود"
+            في 4 حصص فقط، سيتعلم كيف يحفظ كأبطال الذاكرة — 
+            جدول الضرب، القرآن، الاجتماعيات... بدون تكرار ممل
           </p>
           
           <div className="flex flex-col items-center gap-4">
@@ -216,10 +243,10 @@ const KidsMemoryLanding: React.FC = () => {
               onClick={scrollToOffer}
               className="bg-[#22C55E] hover:bg-green-600 text-white text-2xl font-bold py-5 px-10 rounded-2xl shadow-xl hover:shadow-green-500/40 transition-all transform hover:-translate-y-1 w-full md:w-auto"
             >
-              نعم، أريد تفوق ولدي — 400 درهم
+              سجل طفلك الآن — 400 درهم
             </button>
             <div className="flex items-center gap-6 text-gray-500 font-medium text-sm md:text-base">
-              <span className="flex items-center gap-1"><ShieldCheck size={18} className="text-[#22C55E]"/> ضمان استرجاع الفلوس</span>
+              <span className="flex items-center gap-1"><ShieldCheck size={18} className="text-[#22C55E]"/> ضمان استرجاع الأموال</span>
               <span className="flex items-center gap-1"><Users size={18} className="text-[#3B82F6]"/> +3000 متدرب</span>
             </div>
           </div>
@@ -229,18 +256,18 @@ const KidsMemoryLanding: React.FC = () => {
       {/* 2. Problem Section */}
       <section className="py-20 px-4 bg-white">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-dark-blue">واش هادي حياتك كل يوم؟ 😫</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-dark-blue">هل هذه حياتك كل يوم؟ 😫</h2>
           
           <div className="space-y-6 text-xl md:text-2xl text-gray-700 font-medium leading-relaxed">
-            <p>كتوصل من الخدمة عيان/عيانة...</p>
-            <p>وبدل ما ترتاح، كتجلس مع ولدك تعاود معاه الدروس.</p>
-            <p className="text-[#F97316] font-bold">"قرا معايا... ركّز... علاش كتنسى؟!"</p>
-            <p>كتعاود معاه مرة. مرتين. عشر مرات.</p>
-            <p>كيحفظ الليلة... وغدا؟ كينسى كولشي.</p>
-            <p>وفالامتحان؟ كأنو عمرو ما قرا.</p>
-            <p>كتحس بالإحباط.</p>
-            <p>كتسائل راسك: "واش ولدي عندو مشكل؟"</p>
-            <p>وساعات كتحس بالذنب: "واش أنا السبب؟"</p>
+            <p>تعود من العمل متعباً...</p>
+            <p>وبدلاً من أن ترتاح، تجلس مع طفلك لتراجع معه الدروس.</p>
+            <p className="text-[#F97316] font-bold">"اقرأ معي... ركّز... لماذا تنسى؟!"</p>
+            <p>تعيد معه مرة. مرتين. عشر مرات.</p>
+            <p>يحفظ الليلة... وغداً؟ ينسى كل شيء.</p>
+            <p>وفي الامتحان؟ كأنه لم يقرأ أبداً.</p>
+            <p>تشعر بالإحباط.</p>
+            <p>تتساءل: "هل طفلي يعاني من مشكلة؟"</p>
+            <p>وأحياناً تشعر بالذنب: "هل أنا السبب؟"</p>
           </div>
         </div>
       </section>
@@ -251,24 +278,24 @@ const KidsMemoryLanding: React.FC = () => {
           <div className="bg-white p-8 md:p-12 rounded-3xl shadow-lg border-r-8 border-[#3B82F6]">
             {parentType === 'father' ? (
               <>
-                <h2 className="text-3xl font-bold mb-6 text-[#3B82F6]">خويا الأب...</h2>
+                <h2 className="text-3xl font-bold mb-6 text-[#3B82F6]">أخي الأب...</h2>
                 <div className="space-y-4 text-xl text-gray-700 leading-relaxed">
-                  <p>عارف أنك كتخدم بزاف باش توفّر لعائلتك حياة كريمة.</p>
-                  <p>وفاش كترجع للدار، كتلقى ولدك غارق فالدروس.</p>
-                  <p>وكتحس أنك خاصك تساعدو، ولكن ما عارف كيفاش. ولا عندك الوقت تجلس معاه ساعات.</p>
-                  <p className="font-bold text-dark-blue mt-6">والحقيقة؟ ماشي نتا المشكل.</p>
-                  <p>المشكل أن حتى واحد ما علّم ولدك كيفاش يحفظ صحيح.</p>
+                  <p>أعلم أنك تعمل بجد لتوفير حياة كريمة لعائلتك.</p>
+                  <p>وعندما تعود للمنزل، تجد طفلك غارقاً في الدروس.</p>
+                  <p>وتشعر أنه يجب عليك مساعدته، لكنك لا تعرف كيف. وليس لديك الوقت للجلوس معه لساعات.</p>
+                  <p className="font-bold text-dark-blue mt-6">والحقيقة؟ لست أنت المشكلة.</p>
+                  <p>المشكلة أن لا أحد علّم طفلك كيف يحفظ بالطريقة الصحيحة.</p>
                 </div>
               </>
             ) : (
               <>
                 <h2 className="text-3xl font-bold mb-6 text-[#F97316]">أختي الأم...</h2>
                 <div className="space-y-4 text-xl text-gray-700 leading-relaxed">
-                  <p>عارفة أنك كتبذلي كولشي من أجل ولدك.</p>
-                  <p>كتضحّي براحتك. كتسهري معاه. كتحاولي بكل الطرق.</p>
-                  <p>ومع ذلك، كل ما تشوفي نتائجو كتحسّي بالخيبة. وساعات كتلومي راسك.</p>
-                  <p className="font-bold text-dark-blue mt-6">گوليا: واش هادشي عدل؟</p>
-                  <p>نتي اللي خاصك تحسّي بالذنب؟ ولا المدرسة اللي ما علّماتوش الطريقة الصحيحة؟</p>
+                  <p>أعلم أنك تبذلين كل ما بوسعك من أجل طفلك.</p>
+                  <p>تضحين براحتك. تسهرين معه. وتحاولين بكل الطرق.</p>
+                  <p>ومع ذلك، كلما رأيتِ نتائجه تشعرين بالخيبة. وأحياناً تلومين نفسك.</p>
+                  <p className="font-bold text-dark-blue mt-6">أخبريني: هل هذا عدل؟</p>
+                  <p>هل أنتِ من يجب أن تشعري بالذنب؟ أم المدرسة التي لم تعلمه الطريقة الصحيحة؟</p>
                 </div>
               </>
             )}
@@ -282,20 +309,20 @@ const KidsMemoryLanding: React.FC = () => {
           <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-8 shadow-md">
             <Sparkles className="text-[#3B82F6]" size={40} />
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-dark-blue">الحقيقة اللي ما كيقولوهاش ليك:</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-dark-blue">الحقيقة التي لا يخبرونك بها:</h2>
           
           <div className="space-y-4 text-2xl text-gray-800 font-medium mb-10">
-            <p>ولدك ما عندوش أي مشكل فالذاكرة.</p>
-            <p className="text-[#22C55E] font-bold">ولدك ذكي.</p>
-            <p className="text-[#22C55E] font-bold">ولدك قادر.</p>
+            <p>طفلك ليس لديه أي مشكلة في الذاكرة.</p>
+            <p className="text-[#22C55E] font-bold">طفلك ذكي.</p>
+            <p className="text-[#22C55E] font-bold">طفلك قادر.</p>
           </div>
           
           <div className="bg-white/60 p-8 rounded-2xl text-xl text-gray-700 leading-relaxed">
-            <p className="mb-4">المشكل؟</p>
-            <p className="mb-4">فالمدرسة كيقولو ليه "احفظ!" ولكن حتى واحد ما كيشرح ليه كيفاش.</p>
-            <p className="mb-4">فكيعاود وكيعاود وكيعاود... وهاد الطريقة أصلاً ما كتنفعش.</p>
-            <p className="font-bold text-dark-blue text-2xl mt-6">الذاكرة عندها قواعد. عندها أسرار.</p>
-            <p className="font-bold text-[#F97316] text-2xl">وإلى تعلّمها ولدك — كولشي كيتبدل.</p>
+            <p className="mb-4">المشكلة؟</p>
+            <p className="mb-4">في المدرسة يقولون له "احفظ!" ولكن لا أحد يشرح له كيف.</p>
+            <p className="mb-4">فيعيد ويعيد ويعيد... وهذه الطريقة أصلاً غير فعالة.</p>
+            <p className="font-bold text-dark-blue text-2xl mt-6">الذاكرة لها قواعد. لها أسرار.</p>
+            <p className="font-bold text-[#F97316] text-2xl">وإذا تعلمها طفلك — كل شيء يتغير.</p>
           </div>
         </div>
       </section>
@@ -305,7 +332,7 @@ const KidsMemoryLanding: React.FC = () => {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-dark-blue">الحل: دورة الذاكرة للأطفال</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">فـ 4 حصص غير، ولدك غادي يتعلم نفس التقنيات اللي كيستعملوها أبطال العالم:</p>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">في 4 حصص فقط، سيتعلم طفلك نفس التقنيات التي يستخدمها أبطال العالم:</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -314,7 +341,7 @@ const KidsMemoryLanding: React.FC = () => {
               <div className="text-5xl mb-6">🏰</div>
               <h3 className="text-2xl font-bold mb-4 text-dark-blue">القصر الذهني</h3>
               <p className="text-gray-600 text-lg leading-relaxed">
-                ولدك غادي يبني قصر فراسو، ويخزّن فيه أي معلومة. جدول الضرب؟ يدّيه لغرفة الضيوف. الاجتماعيات؟ يدّيها للمطبخ. ما غادي ينسى والو.
+                سيبني طفلك قصراً في خياله، ويخزن فيه أي معلومة. جدول الضرب؟ يأخذه لغرفة الضيوف. الاجتماعيات؟ يأخذها للمطبخ. لن ينسى شيئاً.
               </p>
             </div>
             
@@ -323,7 +350,7 @@ const KidsMemoryLanding: React.FC = () => {
               <div className="text-5xl mb-6">🗺️</div>
               <h3 className="text-2xl font-bold mb-4 text-dark-blue">الخرائط الذهنية</h3>
               <p className="text-gray-600 text-lg leading-relaxed">
-                أي درس معقد، ولدك غادي يحوّلو لرسم بسيط. الدماغ كيحب الصور — وهكذا كيتفكّر بسرعة.
+                أي درس معقد، سيحوله طفلك إلى رسم بسيط. الدماغ يحب الصور — وهكذا يتذكر بسرعة.
               </p>
             </div>
             
@@ -332,7 +359,7 @@ const KidsMemoryLanding: React.FC = () => {
               <div className="text-5xl mb-6">🔁</div>
               <h3 className="text-2xl font-bold mb-4 text-dark-blue">التكرار الذكي</h3>
               <p className="text-gray-600 text-lg leading-relaxed">
-                بدل ما يعاود 100 مرة وينسى... غادي يتعلم كيفاش يعاود مرات قليلة ويحفظ للأبد.
+                بدلاً من أن يعيد 100 مرة وينسى... سيتعلم كيف يعيد مرات قليلة ويحفظ للأبد.
               </p>
             </div>
             
@@ -341,7 +368,7 @@ const KidsMemoryLanding: React.FC = () => {
               <div className="text-5xl mb-6">📖</div>
               <h3 className="text-2xl font-bold mb-4 text-dark-blue">تقنيات حفظ القرآن</h3>
               <p className="text-gray-600 text-lg leading-relaxed">
-                نفس الطريقة اللي كيستعملوها حفّاظ القرآن. ولدك غادي يحفظ الآيات ويثبّتها فذاكرتو.
+                نفس الطريقة التي يستخدمها حفّاظ القرآن. سيحفظ طفلك الآيات ويثبتها في ذاكرته.
               </p>
             </div>
           </div>
@@ -351,7 +378,7 @@ const KidsMemoryLanding: React.FC = () => {
       {/* 6. Comparison Section */}
       <section className="py-20 px-4 bg-[#F3F4F6]">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-dark-blue">شنو الفرق بين الدورة ديالنا والطرق التقليدية؟</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-dark-blue">ما الفرق بين دورتنا والطرق التقليدية؟</h2>
           
           {/* Desktop Table (hidden on mobile) */}
           <div className="hidden md:block bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
@@ -391,7 +418,7 @@ const KidsMemoryLanding: React.FC = () => {
                     <td className="p-6 text-center bg-green-50">
                       <div className="flex flex-col items-center gap-2">
                         <Check className="text-green-600" size={28} />
-                        <span className="text-green-800 font-bold">حصص مباشرة تفاعلية (لايڤ)</span>
+                        <span className="text-green-800 font-bold">حصص مباشرة تفاعلية</span>
                       </div>
                     </td>
                   </tr>
@@ -415,7 +442,7 @@ const KidsMemoryLanding: React.FC = () => {
                     <td className="p-6 text-center bg-red-50/30">
                       <div className="flex flex-col items-center gap-2">
                         <X className="text-red-500" size={28} />
-                        <span className="text-gray-600">دورة وتمشي (غياب الدعم)</span>
+                        <span className="text-gray-600">دورة وتنتهي (غياب الدعم)</span>
                       </div>
                     </td>
                     <td className="p-6 text-center bg-green-50">
@@ -465,7 +492,7 @@ const KidsMemoryLanding: React.FC = () => {
                 <div className="p-4 text-center bg-green-50">
                   <div className="text-sm text-green-700 mb-2 font-bold">دورة الذاكرة</div>
                   <Check className="text-green-600 mx-auto mb-2" size={24} />
-                  <span className="text-green-800 font-bold text-sm">حصص مباشرة تفاعلية (لايڤ)</span>
+                  <span className="text-green-800 font-bold text-sm">حصص مباشرة تفاعلية</span>
                 </div>
               </div>
             </div>
@@ -498,7 +525,7 @@ const KidsMemoryLanding: React.FC = () => {
                 <div className="p-4 text-center bg-red-50/30">
                   <div className="text-sm text-gray-500 mb-2">الطرق التقليدية</div>
                   <X className="text-red-500 mx-auto mb-2" size={24} />
-                  <span className="text-gray-600 text-sm">دورة وتمشي (غياب الدعم)</span>
+                  <span className="text-gray-600 text-sm">دورة وتنتهي (غياب الدعم)</span>
                 </div>
                 <div className="p-4 text-center bg-green-50">
                   <div className="text-sm text-green-700 mb-2 font-bold">دورة الذاكرة</div>
@@ -520,10 +547,10 @@ const KidsMemoryLanding: React.FC = () => {
               
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center gap-3 text-xl font-medium text-gray-700">
-                  <span className="text-2xl">🏆</span> شاركت فالبطولة العربية للذاكرة
+                  <span className="text-2xl">🏆</span> شاركت في البطولة العربية للذاكرة
                 </li>
                 <li className="flex items-center gap-3 text-xl font-medium text-gray-700">
-                  <span className="text-2xl">🏆</span> شاركت فالبطولة الأفريقية للذاكرة
+                  <span className="text-2xl">🏆</span> شاركت في البطولة الأفريقية للذاكرة
                 </li>
                 <li className="flex items-center gap-3 text-xl font-medium text-gray-700">
                   <span className="text-2xl">🏆</span> مسؤول عن البطولة الوطنية المغربية للذاكرة
@@ -532,10 +559,10 @@ const KidsMemoryLanding: React.FC = () => {
               
               <div className="bg-blue-50 p-6 rounded-2xl border-r-4 border-[#3B82F6]">
                 <p className="text-xl text-gray-800 leading-relaxed font-medium mb-4">
-                  "درّبت أكثر من 3000 شخص — أصغرهم 7 سنين وأكبرهم 73 سنة.
+                  "درّبت أكثر من 3000 شخص — أصغرهم 7 سنوات وأكبرهم 73 سنة.
                 </p>
                 <p className="text-xl text-gray-800 leading-relaxed font-bold">
-                  التقنيات اللي استعملت فالبطولات العالمية؟ دابا كنعلّمها لولدك."
+                  التقنيات التي استعملتها في البطولات العالمية؟ الآن أعلمها لطفلك."
                 </p>
               </div>
             </div>
@@ -555,15 +582,15 @@ const KidsMemoryLanding: React.FC = () => {
       {/* 8. Offer Stack */}
       <section id="offer-stack" className="py-20 px-4 bg-[#DCFCE7]">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center text-dark-blue">شنو غادي تاخد مقابل 400 درهم؟</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center text-dark-blue">ماذا ستحصل مقابل 400 درهم؟</h2>
           
           <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12">
             <ul className="space-y-6 mb-10">
               <li className="flex items-start gap-4">
                 <CheckCircle2 className="text-[#22C55E] flex-shrink-0 mt-1" size={28} />
                 <div>
-                  <h4 className="text-xl font-bold text-gray-900">4 حصص مباشرة لايڤ</h4>
-                  <p className="text-gray-600">حصص تفاعلية، ماشي فيديوهات مملة</p>
+                  <h4 className="text-xl font-bold text-gray-900">4 حصص مباشرة</h4>
+                  <p className="text-gray-600">حصص تفاعلية، وليست فيديوهات مملة</p>
                   <span className="text-sm text-gray-400 line-through">(قيمتها 600 درهم)</span>
                 </div>
               </li>
@@ -571,7 +598,7 @@ const KidsMemoryLanding: React.FC = () => {
                 <CheckCircle2 className="text-[#22C55E] flex-shrink-0 mt-1" size={28} />
                 <div>
                   <h4 className="text-xl font-bold text-gray-900">تسجيلات الحصص — مدى الحياة</h4>
-                  <p className="text-gray-600">ولدك يراجع أي وقت يبغي</p>
+                  <p className="text-gray-600">طفلك يراجع في أي وقت يشاء</p>
                   <span className="text-sm text-gray-400 line-through">(قيمتها 200 درهم)</span>
                 </div>
               </li>
@@ -579,7 +606,7 @@ const KidsMemoryLanding: React.FC = () => {
                 <CheckCircle2 className="text-[#22C55E] flex-shrink-0 mt-1" size={28} />
                 <div>
                   <h4 className="text-xl font-bold text-gray-900">تطبيق "ذاكرتي" — مجاناً</h4>
-                  <p className="text-gray-600">يتدرب عليه كل يوم ويقوّي ذاكرتو</p>
+                  <p className="text-gray-600">يتدرب عليه كل يوم ويقوّي ذاكرته</p>
                   <span className="text-sm text-gray-400 line-through">(قيمتو 150 درهم)</span>
                 </div>
               </li>
@@ -587,15 +614,15 @@ const KidsMemoryLanding: React.FC = () => {
                 <CheckCircle2 className="text-[#22C55E] flex-shrink-0 mt-1" size={28} />
                 <div>
                   <h4 className="text-xl font-bold text-gray-900">مجموعة واتساب للدعم — 30 يوم</h4>
-                  <p className="text-gray-600">أي سؤال عندك، أنا موجود</p>
+                  <p className="text-gray-600">أي سؤال لديك، أنا موجود</p>
                   <span className="text-sm text-gray-400 line-through">(قيمتها 100 درهم)</span>
                 </div>
               </li>
               <li className="flex items-start gap-4">
                 <CheckCircle2 className="text-[#22C55E] flex-shrink-0 mt-1" size={28} />
                 <div>
-                  <h4 className="text-xl font-bold text-gray-900">نتا كوالد تقدر تحضر مع ولدك</h4>
-                  <p className="text-gray-600">تشوف كيفاش كيتعلم، وتستافد حتى نتا</p>
+                  <h4 className="text-xl font-bold text-gray-900">أنت كولي أمر يمكنك الحضور مع طفلك</h4>
+                  <p className="text-gray-600">ترى كيف يتعلم، وتستفيد أنت أيضاً</p>
                   <span className="text-sm text-[#22C55E] font-bold">(بلا أي زيادة)</span>
                 </div>
               </li>
@@ -603,7 +630,7 @@ const KidsMemoryLanding: React.FC = () => {
             
             <div className="border-t-2 border-dashed border-gray-200 pt-8 pb-6 text-center mb-8">
               <p className="text-xl text-gray-500 mb-2">المجموع الحقيقي: <span className="line-through">1050 درهم</span></p>
-              <p className="text-3xl md:text-4xl font-black text-dark-blue">نتا غادي تخلص: <span className="text-[#22C55E]">400 درهم فقط</span></p>
+              <p className="text-3xl md:text-4xl font-black text-dark-blue">أنت ستدفع: <span className="text-[#22C55E]">400 درهم فقط</span></p>
             </div>
             
             <div className="bg-orange-50 border border-orange-200 rounded-2xl p-6 mb-8 flex items-start gap-4">
@@ -611,7 +638,7 @@ const KidsMemoryLanding: React.FC = () => {
               <div>
                 <h4 className="text-xl font-bold text-gray-900 mb-2">ضمان استرجاع الأموال 100%</h4>
                 <p className="text-gray-700 leading-relaxed">
-                  إلى ما لاحظتيش فرق فمستوى ولدك بعد الحصة الأولى، غادي نرجعو ليك فلوسك كاملة بلا ما نسولوك حتى سؤال. المخاطرة علينا حنا، ماشي عليك!
+                  إذا لم تلاحظ فرقاً في مستوى طفلك بعد الحصة الأولى، سنعيد لك أموالك كاملة بدون أن نسألك أي سؤال. المخاطرة علينا نحن، وليست عليك!
                 </p>
               </div>
             </div>
@@ -620,7 +647,7 @@ const KidsMemoryLanding: React.FC = () => {
               onClick={openModal}
               className="w-full bg-[#22C55E] hover:bg-green-600 text-white text-2xl font-bold py-5 rounded-2xl shadow-xl hover:shadow-green-500/40 transition-all transform hover:-translate-y-1"
             >
-              سجّل ولدك دابا
+              سجل طفلك الآن
             </button>
           </div>
         </div>
@@ -629,7 +656,7 @@ const KidsMemoryLanding: React.FC = () => {
       {/* 9. Results Section */}
       <section className="py-20 px-4 bg-white">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-dark-blue">بعد الدورة، ولدك غادي:</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-dark-blue">بعد الدورة، طفلك سوف:</h2>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="bg-white border border-gray-100 shadow-sm p-6 rounded-2xl flex items-start gap-4">
@@ -644,7 +671,7 @@ const KidsMemoryLanding: React.FC = () => {
               <div className="text-3xl">🎯</div>
               <div>
                 <h4 className="text-xl font-bold text-gray-900 mb-1">يركّز وقت أطول</h4>
-                <p className="text-gray-600">بلا تشتت وبلا ملل</p>
+                <p className="text-gray-600">بدون تشتت وبدون ملل</p>
               </div>
             </div>
             
@@ -652,23 +679,23 @@ const KidsMemoryLanding: React.FC = () => {
               <div className="text-3xl">😊</div>
               <div>
                 <h4 className="text-xl font-bold text-gray-900 mb-1">يحب وقت الدراسة</h4>
-                <p className="text-gray-600">بدل الصراخ والبكا والتوتر</p>
+                <p className="text-gray-600">بدل الصراخ والبكاء والتوتر</p>
               </div>
             </div>
             
             <div className="bg-white border border-gray-100 shadow-sm p-6 rounded-2xl flex items-start gap-4">
               <div className="text-3xl">💪</div>
               <div>
-                <h4 className="text-xl font-bold text-gray-900 mb-1">يثق فراسو</h4>
-                <p className="text-gray-600">لأنو غادي يشوف النتائج بعينيه</p>
+                <h4 className="text-xl font-bold text-gray-900 mb-1">يثق بنفسه</h4>
+                <p className="text-gray-600">لأنه سيرى النتائج بعينيه</p>
               </div>
             </div>
             
             <div className="bg-white border border-gray-100 shadow-sm p-6 rounded-2xl flex items-start gap-4 sm:col-span-2 sm:max-w-md sm:mx-auto w-full">
               <div className="text-3xl">🤝</div>
               <div>
-                <h4 className="text-xl font-bold text-gray-900 mb-1">علاقتكم غادي تتحسن</h4>
-                <p className="text-gray-600">لأن وقت الدروس ما غاديش يبقى حرب</p>
+                <h4 className="text-xl font-bold text-gray-900 mb-1">علاقتكم ستتحسن</h4>
+                <p className="text-gray-600">لأن وقت الدروس لن يبقى حرباً</p>
               </div>
             </div>
           </div>
@@ -678,7 +705,7 @@ const KidsMemoryLanding: React.FC = () => {
       {/* 10. Testimonials (WhatsApp Style) */}
       <section className="py-20 px-4 bg-[#E5DDD5] overflow-hidden">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-dark-blue">شنو كيقولو الآباء؟</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-dark-blue">ماذا يقول الآباء؟</h2>
           
           <div className="relative h-[600px] overflow-hidden mask-image-linear-gradient">
             <motion.div
@@ -709,14 +736,14 @@ const KidsMemoryLanding: React.FC = () => {
                     <div className="p-4 bg-[url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')]">
                       <div className="bg-[#DCF8C6] p-3 rounded-xl rounded-tr-none inline-block max-w-[90%] shadow-sm relative">
                         <p className="text-gray-800 text-[15px] leading-relaxed mb-4">
-                          ولدي كان كينسى جدول الضرب كل يوم. كنعاود معاه ساعات وما كيوصلش. بعد الدورة مع الأستاذ أحمد، دابا كيفاجئني بالأجوبة قبل ما نكمّل السؤال! 🤩
+                          طفلي كان ينسى جدول الضرب كل يوم. أراجع معه لساعات دون جدوى. بعد الدورة مع الأستاذ أحمد، أصبح يفاجئني بالإجابات قبل أن أكمل السؤال! 🤩
                         </p>
                         <div className="flex items-center justify-end gap-1 text-xs text-gray-500">
                           <span>10:42</span>
                           <span className="text-[#34B7F1]">✓✓</span>
                         </div>
                       </div>
-                      <p className="text-center text-xs text-gray-500 mt-3 bg-white/80 inline-block px-2 py-1 rounded-full mx-auto block w-max">(ولدها 9 سنين)</p>
+                      <p className="text-center text-xs text-gray-500 mt-3 bg-white/80 inline-block px-2 py-1 rounded-full mx-auto block w-max">(ابنها 9 سنوات)</p>
                     </div>
                   </div>
 
@@ -734,14 +761,14 @@ const KidsMemoryLanding: React.FC = () => {
                     <div className="p-4 bg-[url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')]">
                       <div className="bg-[#DCF8C6] p-3 rounded-xl rounded-tr-none inline-block max-w-[90%] shadow-sm relative">
                         <p className="text-gray-800 text-[15px] leading-relaxed mb-4">
-                          كنت خايف على مستقبل بنتي. كل ما نشوفها كتعاني مع الدروس، قلبي كيتقطّع. الأستاذ أحمد علّمها تقنيات بسيطة ودابا كتقرا بروحها بلا ما نصيّح عليها 💪
+                          كنت خائفاً على مستقبل ابنتي. كلما أراها تعاني مع الدروس، يتمزق قلبي. الأستاذ أحمد علمها تقنيات بسيطة والآن تدرس بمفردها دون أن أصرخ عليها 💪
                         </p>
                         <div className="flex items-center justify-end gap-1 text-xs text-gray-500">
                           <span>14:15</span>
                           <span className="text-[#34B7F1]">✓✓</span>
                         </div>
                       </div>
-                      <p className="text-center text-xs text-gray-500 mt-3 bg-white/80 inline-block px-2 py-1 rounded-full mx-auto block w-max">(بنتو 11 سنة)</p>
+                      <p className="text-center text-xs text-gray-500 mt-3 bg-white/80 inline-block px-2 py-1 rounded-full mx-auto block w-max">(ابنته 11 سنة)</p>
                     </div>
                   </div>
 
@@ -759,14 +786,14 @@ const KidsMemoryLanding: React.FC = () => {
                     <div className="p-4 bg-[url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')]">
                       <div className="bg-[#DCF8C6] p-3 rounded-xl rounded-tr-none inline-block max-w-[90%] shadow-sm relative">
                         <p className="text-gray-800 text-[15px] leading-relaxed mb-4">
-                          أحسن استثمار درتو فحياتي. 400 درهم مقابل راحة البال؟ يستاهلو! 👍
+                          أفضل استثمار قمت به في حياتي. 400 درهم مقابل راحة البال؟ تستحق! 👍
                         </p>
                         <div className="flex items-center justify-end gap-1 text-xs text-gray-500">
                           <span>18:30</span>
                           <span className="text-[#34B7F1]">✓✓</span>
                         </div>
                       </div>
-                      <p className="text-center text-xs text-gray-500 mt-3 bg-white/80 inline-block px-2 py-1 rounded-full mx-auto block w-max">(ولدها 8 سنين)</p>
+                      <p className="text-center text-xs text-gray-500 mt-3 bg-white/80 inline-block px-2 py-1 rounded-full mx-auto block w-max">(ابنها 8 سنوات)</p>
                     </div>
                   </div>
                 </React.Fragment>
@@ -782,21 +809,21 @@ const KidsMemoryLanding: React.FC = () => {
           <h2 className="text-4xl md:text-5xl font-black mb-10 text-white">سؤال أخير...</h2>
           
           <div className="space-y-6 text-xl md:text-2xl text-gray-300 font-medium mb-12">
-            <p>كل يوم كيفوت، ولدك كيتأخر أكثر.</p>
-            <p>كل امتحان كيفشل فيه، ثقتو فراسو كتنقص.</p>
-            <p>كل ليلة ديال الصراخ والتوتر، علاقتكم كتتضرر.</p>
+            <p>كل يوم يمر، طفلك يتأخر أكثر.</p>
+            <p>كل امتحان يفشل فيه، ثقته بنفسه تقل.</p>
+            <p>كل ليلة من الصراخ والتوتر، علاقتكم تتضرر.</p>
             
-            <p className="text-white font-bold mt-10">السؤال ماشي "واش الدورة غادي تنفع؟"</p>
-            <p className="text-[#F97316] font-bold text-3xl mt-4">السؤال هو: "شحال غادي تسنّى؟"</p>
+            <p className="text-white font-bold mt-10">السؤال ليس "هل ستنفع الدورة؟"</p>
+            <p className="text-[#F97316] font-bold text-3xl mt-4">السؤال هو: "كم ستنتظر؟"</p>
             
             <p className="text-lg mt-8 leading-relaxed max-w-2xl mx-auto">
-              التقنيات هادي ما غاديش تنفع ولدك غير دابا. غادي تنفعو طول حياتو — فالإعدادي، فالثانوي، فالجامعة، وحتى فالخدمة.
+              هذه التقنيات لن تنفع طفلك الآن فقط. ستنفعه طوال حياته — في الإعدادي، في الثانوي، في الجامعة، وحتى في العمل.
             </p>
           </div>
           
           <div className="bg-white/10 p-8 rounded-3xl backdrop-blur-sm border border-white/20 mb-10">
             <p className="text-3xl md:text-4xl font-black text-white">
-              400 درهم دابا = <span className="text-[#22C55E]">مستقبل مختلف لولدك.</span>
+              400 درهم الآن = <span className="text-[#22C55E]">مستقبل مختلف لطفلك.</span>
             </p>
           </div>
           
@@ -812,15 +839,15 @@ const KidsMemoryLanding: React.FC = () => {
       {/* 13. Registration CTA */}
       <section className="py-20 px-4 bg-[#F9FAFB]">
         <div className="max-w-xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-dark-blue">مستعد تبدل حياة ولدك الدراسية؟</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-dark-blue">مستعد لتغيير حياة طفلك الدراسية؟</h2>
           <p className="text-xl text-gray-600 mb-10">
-            اضغط على الزر لتحت باش تبدا عملية التسجيل. الأماكن محدودة!
+            اضغط على الزر أدناه لتبدأ عملية التسجيل. الأماكن محدودة!
           </p>
           <button 
             onClick={openModal}
             className="w-full md:w-auto bg-[#22C55E] hover:bg-green-600 text-white text-2xl font-bold py-5 px-12 rounded-2xl shadow-[0_0_30px_rgba(34,197,94,0.4)] hover:shadow-[0_0_40px_rgba(34,197,94,0.6)] transition-all transform hover:-translate-y-1"
           >
-            نعم، أريد هذا البرنامج لطفلي
+            سجل طفلك الآن
           </button>
         </div>
       </section>
@@ -828,7 +855,7 @@ const KidsMemoryLanding: React.FC = () => {
       {/* 11. FAQ Section */}
       <section className="py-20 px-4 bg-[#F9FAFB]">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-dark-blue">أسئلة كيطرحوها الآباء:</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-dark-blue">أسئلة يطرحها الآباء:</h2>
           
           <div className="space-y-4">
             {faqs.map((faq, index) => (
@@ -878,7 +905,7 @@ const KidsMemoryLanding: React.FC = () => {
           <p className="mb-2">دورة الذاكرة للأطفال — المدرب أحمد</p>
           <p className="mb-8">+3000 متدرب | بطولات عربية وأفريقية</p>
           
-          <a href="#" className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-green-600 text-white px-6 py-3 rounded-full font-bold transition-colors mb-12">
+          <a href="https://wa.me/212633698758" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-green-600 text-white px-6 py-3 rounded-full font-bold transition-colors mb-12">
             <MessageCircle size={20} />
             تواصل معنا
           </a>
