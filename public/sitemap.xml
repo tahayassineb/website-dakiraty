@@ -29,4 +29,42 @@
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- Blog articles -->
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/kayfa-tuqawwi-dhakirataka-fi-30-yawm</loc>
+    <lastmod>2026-05-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/tiqniyat-m5-abtal-aldhakira</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/kayfa-tahfaz-alquran-bisuraa-wa-thubut</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/khams-akhta-tunsi-alquran</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/kayfa-tusaeid-tiflaka-ala-hifz-durusihi</loc>
+    <lastmod>2026-02-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/afdal-12-taama-litaqwiyat-aldhakira</loc>
+    <lastmod>2026-01-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
