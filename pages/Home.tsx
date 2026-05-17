@@ -1,18 +1,65 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Brain, BookOpen, Play, 
-  Users, MessageCircle, ArrowLeft, ShieldCheck, Sparkles 
+import {
+  Brain, BookOpen, Play,
+  Users, MessageCircle, ArrowLeft, ShieldCheck, Sparkles
 } from 'lucide-react';
+import Seo from '../components/Seo';
 
 const prefetchRoute = (path: string) => {
   if (path === '/dakiraty') import('./DakiratyLanding');
   if (path === '/quran') import('./ProgramDetails');
 };
 
+const homeJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'كوتش أحمد',
+    url: 'https://website-dakiraty.vercel.app',
+    inLanguage: 'ar',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://website-dakiraty.vercel.app/blog?q={search_term_string}',
+      'query-input': 'required name=search_term_string'
+    }
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        url: 'https://website-dakiraty.vercel.app/dakiraty',
+        name: 'برنامج ذاكرتي - تدريب الذاكرة'
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        url: 'https://website-dakiraty.vercel.app/quran',
+        name: 'برنامج الذاكرة والقرآن الكريم'
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        url: 'https://website-dakiraty.vercel.app/kids-memory',
+        name: 'برنامج الذاكرة للأطفال'
+      }
+    ]
+  }
+];
+
 const Home: React.FC = () => {
   return (
     <div className="flex flex-col font-sans">
+      <Seo
+        title="كوتش أحمد | تدريب الذاكرة وحفظ القرآن الكريم - برامج عربية معتمدة"
+        description="انضم لأكثر من 5000 متدرب في برامج كوتش أحمد لتقوية الذاكرة وحفظ القرآن الكريم. منهجية تجمع علم الأعصاب وتقنيات أبطال العالم للذاكرة. شهادة معتمدة وضمان استرداد."
+        keywords="كوتش أحمد, تقوية الذاكرة, حفظ القرآن الكريم, تدريب الذاكرة, ذاكرة الأطفال, دورات الذاكرة المغرب, تقنيات أبطال الذاكرة, طرق الحفظ السريع"
+        path="/"
+        jsonLd={homeJsonLd}
+      />
       
       {/* SECTION 1: HERO (Above the Fold) */}
       <section className="relative bg-dark-blue text-white overflow-hidden min-h-[90vh] flex items-center pt-10">

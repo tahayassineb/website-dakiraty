@@ -1,6 +1,7 @@
 import React from 'react';
 import { Search, Calendar, Clock, Download, ChevronRight } from 'lucide-react';
 import { Article } from '../types';
+import Seo from '../components/Seo';
 
 const Blog: React.FC = () => {
   const articles: Article[] = [
@@ -42,9 +43,39 @@ const Blog: React.FC = () => {
       }
   ];
 
+  const blogJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'مدونة كوتش أحمد - مقالات الذاكرة والحفظ',
+    description: 'مقالات وأدلة عملية حول تقوية الذاكرة، حفظ القرآن الكريم، التركيز والإنتاجية.',
+    inLanguage: 'ar',
+    url: 'https://website-dakiraty.vercel.app/blog',
+    publisher: {
+      '@type': 'EducationalOrganization',
+      name: 'كوتش أحمد',
+      url: 'https://website-dakiraty.vercel.app'
+    },
+    blogPost: articles.map(a => ({
+      '@type': 'BlogPosting',
+      headline: a.title,
+      description: a.excerpt,
+      datePublished: a.date,
+      image: a.imageUrl,
+      author: { '@type': 'Person', name: 'كوتش أحمد' },
+      articleSection: a.category
+    }))
+  };
+
   return (
     <div className="bg-gray-50 min-h-screen pb-20">
-      
+      <Seo
+        title="مدونة كوتش أحمد | مقالات تقوية الذاكرة وحفظ القرآن الكريم"
+        description="اكتشف أحدث المقالات والنصائح العملية لتقوية الذاكرة، تقنيات حفظ القرآن، تحسين التركيز، والتغلب على النسيان. محتوى مكتوب من خبراء الذاكرة بأسلوب علمي مبسط."
+        keywords="مقالات الذاكرة, نصائح حفظ القرآن, التركيز الذهني, علاج النسيان, تقوية الذاكرة, الذاكرة قبل الامتحانات, التغذية والذاكرة"
+        path="/blog"
+        jsonLd={blogJsonLd}
+      />
+
       {/* Featured Article Hero */}
       <section className="bg-gradient-to-r from-primary-blue to-dark-blue text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

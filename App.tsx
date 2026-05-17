@@ -1,5 +1,5 @@
 import React, { useEffect, Suspense, lazy } from 'react';
-import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 
 const Home = lazy(() => import('./pages/Home'));
@@ -20,7 +20,7 @@ const ScrollToTop = () => {
 
 const App: React.FC = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <ScrollToTop />
       <Layout>
         <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><div className="w-12 h-12 border-4 border-primary-blue border-t-transparent rounded-full animate-spin"></div></div>}>
@@ -33,7 +33,7 @@ const App: React.FC = () => {
           </Routes>
         </Suspense>
       </Layout>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 
