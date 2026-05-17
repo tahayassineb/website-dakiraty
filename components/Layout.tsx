@@ -1,17 +1,20 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
-interface LayoutProps {
-  children?: React.ReactNode;
-}
+const Layout: React.FC = () => {
+  const { pathname } = useLocation();
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <div className="flex flex-col min-h-screen font-sans">
       <Navbar />
       <main className="flex-grow pt-32 md:pt-20">
-        {children}
+        <Outlet />
       </main>
       <Footer />
     </div>

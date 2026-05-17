@@ -183,12 +183,18 @@ const Blog: React.FC = () => {
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
                     <h3 className="text-lg font-bold text-dark-blue mb-4">التصنيفات</h3>
                     <ul className="space-y-2">
-                        {['الذاكرة والتركيز', 'حفظ القرآن', 'تطوير الذات', 'الصحة والغذاء', 'قصص نجاح'].map((cat, i) => (
-                            <li key={i}>
+                        {[
+                            { name: 'الذاكرة والتركيز', count: 18 },
+                            { name: 'حفظ القرآن', count: 12 },
+                            { name: 'تطوير الذات', count: 9 },
+                            { name: 'الصحة والغذاء', count: 7 },
+                            { name: 'قصص نجاح', count: 5 },
+                        ].map((cat) => (
+                            <li key={cat.name}>
                                 <a href="#" className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-blue-50 text-gray-600 hover:text-primary-blue transition-colors group">
-                                    <span>{cat}</span>
+                                    <span>{cat.name}</span>
                                     <span className="bg-gray-100 text-gray-500 text-xs px-2 py-0.5 rounded-full group-hover:bg-blue-100 group-hover:text-blue-700">
-                                        {Math.floor(Math.random() * 20) + 1}
+                                        {cat.count}
                                     </span>
                                 </a>
                             </li>
