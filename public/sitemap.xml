@@ -10,6 +10,11 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://website-dakiraty.vercel.app/"/>
   </url>
   <url>
+    <loc>https://website-dakiraty.vercel.app/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://website-dakiraty.vercel.app/dakiraty</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -36,6 +41,8 @@
     <lastmod>2026-05-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://website-dakiraty.vercel.app/blog/kayfa-tuqawwi-dhakirataka-fi-30-yawm"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://website-dakiraty.vercel.app/fr/blog/comment-renforcer-memoire-30-jours"/>
   </url>
   <url>
     <loc>https://website-dakiraty.vercel.app/blog/tiqniyat-m5-abtal-aldhakira</loc>
@@ -48,6 +55,8 @@
     <lastmod>2026-01-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://website-dakiraty.vercel.app/blog/afdal-12-taama-litaqwiyat-aldhakira"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://website-dakiraty.vercel.app/fr/blog/12-aliments-pour-renforcer-la-memoire"/>
   </url>
   <url>
     <loc>https://website-dakiraty.vercel.app/blog/munhana-alnisyan-wa-kayfa-tatghallab-alayh</loc>
@@ -138,6 +147,8 @@
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://website-dakiraty.vercel.app/blog/tiqniyat-bumudoro-li-aldhakira"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://website-dakiraty.vercel.app/fr/blog/technique-pomodoro-pour-la-memoire"/>
   </url>
   <url>
     <loc>https://website-dakiraty.vercel.app/blog/kayfa-tahfaz-mufradat-lugha-ajnabiyya</loc>
@@ -192,5 +203,36 @@
     <lastmod>2026-06-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+
+  <!-- French versions -->
+  <url>
+    <loc>https://website-dakiraty.vercel.app/fr/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/fr/blog/comment-renforcer-memoire-30-jours</loc>
+    <lastmod>2026-05-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://website-dakiraty.vercel.app/blog/kayfa-tuqawwi-dhakirataka-fi-30-yawm"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://website-dakiraty.vercel.app/fr/blog/comment-renforcer-memoire-30-jours"/>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/fr/blog/technique-pomodoro-pour-la-memoire</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://website-dakiraty.vercel.app/blog/tiqniyat-bumudoro-li-aldhakira"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://website-dakiraty.vercel.app/fr/blog/technique-pomodoro-pour-la-memoire"/>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/fr/blog/12-aliments-pour-renforcer-la-memoire</loc>
+    <lastmod>2026-01-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://website-dakiraty.vercel.app/blog/afdal-12-taama-litaqwiyat-aldhakira"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://website-dakiraty.vercel.app/fr/blog/12-aliments-pour-renforcer-la-memoire"/>
   </url>
 </urlset>

@@ -1,6 +1,6 @@
 import type { RouteRecord } from 'vite-react-ssg';
 import Layout from './components/Layout';
-import { articleSlugs } from './lib/articles';
+import { articleSlugs, articleSlugsFr } from './lib/articles';
 
 /**
  * Routes config for vite-react-ssg.
@@ -41,6 +41,11 @@ export const routes: RouteRecord[] = [
         entry: 'pages/KidsMemoryLanding.tsx',
       },
       {
+        path: 'about',
+        lazy: () => import('./pages/About').then((m) => ({ Component: m.default })),
+        entry: 'pages/About.tsx',
+      },
+      {
         path: 'blog',
         lazy: () => import('./pages/Blog').then((m) => ({ Component: m.default })),
         entry: 'pages/Blog.tsx',
@@ -50,6 +55,23 @@ export const routes: RouteRecord[] = [
         lazy: () => import('./pages/BlogPost').then((m) => ({ Component: m.default })),
         entry: 'pages/BlogPost.tsx',
         getStaticPaths: () => articleSlugs,
+      },
+      {
+        path: 'fr/blog',
+        lazy: async () => {
+          const BlogFr = (await import('./pages/BlogFr')).default;
+          return { Component: BlogFr };
+        },
+        entry: 'pages/BlogFr.tsx',
+      },
+      {
+        path: 'fr/blog/:slug',
+        lazy: async () => {
+          const BlogPostFr = (await import('./pages/BlogPostFr')).default;
+          return { Component: BlogPostFr };
+        },
+        entry: 'pages/BlogPostFr.tsx',
+        getStaticPaths: () => articleSlugsFr,
       },
     ],
   },

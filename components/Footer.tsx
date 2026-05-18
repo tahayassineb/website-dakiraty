@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-bold mb-6 text-white">روابط هامة</h3>
             <ul className="space-y-4">
-              <li><Link to="/" onMouseEnter={() => prefetchRoute('/')} className="text-gray-400 hover:text-accent-yellow transition-colors block">من نحن</Link></li>
+              <li><Link to="/about" className="text-gray-400 hover:text-accent-yellow transition-colors block">من نحن</Link></li>
               <li><Link to="/dakiraty" onMouseEnter={() => prefetchRoute('/dakiraty')} className="text-gray-400 hover:text-accent-yellow transition-colors block">برنامج ذاكرتي</Link></li>
               <li><Link to="/quran" onMouseEnter={() => prefetchRoute('/quran')} className="text-gray-400 hover:text-accent-yellow transition-colors block">برنامج القرآن</Link></li>
               <li><a href="#" className="text-gray-400 hover:text-accent-yellow transition-colors block">سياسة الخصوصية</a></li>

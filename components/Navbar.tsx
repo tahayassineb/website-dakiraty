@@ -15,6 +15,7 @@ const Navbar: React.FC = () => {
 
   const navLinks = [
     { name: 'الرئيسية', path: '/' },
+    { name: 'من نحن', path: '/about' },
     { name: 'برنامج ذاكرتي', path: '/dakiraty' },
     { name: 'برنامج القرآن', path: '/quran' },
     { name: 'ذاكرة الأطفال', path: '/kids-memory' },
