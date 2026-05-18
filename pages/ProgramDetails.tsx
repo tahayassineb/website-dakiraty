@@ -6,6 +6,7 @@ import {
 import { Link as ScrollLink } from 'react-scroll';
 import { ProgramData } from '../types';
 import LiteYouTubeEmbed from '../components/LiteYouTubeEmbed';
+import Seo from '../components/Seo';
 
 declare global {
   interface Window {
@@ -103,9 +104,8 @@ const ProgramDetails: React.FC<ProgramDetailsProps> = ({ type }) => {
     
     setStatus('submitting');
 
-    const intakeOverride = import.meta.env.VITE_LEAD_INTAKE_URL?.trim();
     const webhookUrl = type === 'quran' 
-        ? intakeOverride || 'https://adjoining-bee-105.eu-west-1.convex.site/intake/website' 
+        ? 'https://n8n.srv1041616.hstgr.cloud/webhook/3e8f8f74-a09d-4175-b556-406519e19a08' 
         : ''; // Fallback if needed for other types
 
     if (!webhookUrl) {
@@ -224,9 +224,57 @@ const ProgramDetails: React.FC<ProgramDetailsProps> = ({ type }) => {
         isAvailable: true
     };
 
+  const quranJsonLd = type === 'quran' ? [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Course',
+      name: 'دورة الذاكرة والقرآن الكريم',
+      description: 'دورة مكثفة لمدة 3 أيام لتعلم تقنيات أبطال العالم في حفظ القرآن الكريم. مداخيل الدورة كاملة لدعم أيتام جمعية ابتسم.',
+      provider: {
+        '@type': 'EducationalOrganization',
+        name: 'كوتش أحمد',
+        sameAs: 'https://website-dakiraty.vercel.app'
+      },
+      inLanguage: 'ar',
+      teaches: ['حفظ القرآن الكريم', 'تقنيات M5', 'تثبيت الحفظ', 'مراجعة المحفوظ'],
+      offers: {
+        '@type': 'Offer',
+        price: '200',
+        priceCurrency: 'MAD',
+        availability: 'https://schema.org/InStock',
+        url: 'https://website-dakiraty.vercel.app/quran'
+      },
+      hasCourseInstance: {
+        '@type': 'CourseInstance',
+        courseMode: 'online',
+        courseWorkload: 'PT3D',
+        inLanguage: 'ar'
+      }
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: data.faqs.map(f => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: { '@type': 'Answer', text: f.answer }
+      }))
+    }
+  ] : undefined;
+
   return (
     <div className="bg-gray-50 min-h-screen pb-20 md:pb-0">
-      
+      {type === 'quran' && (
+        <Seo
+          title="دورة حفظ القرآن الكريم في 3 أيام بتقنيات أبطال الذاكرة | كوتش أحمد"
+          description="تعلم كيف تحفظ القرآن الكريم بسهولة وثبات في 3 أيام بتقنية M5 العالمية. دورة مع المدرب أحمد بـ 200 درهم فقط - مداخيل الدورة كلها لدعم أيتام جمعية ابتسم."
+          keywords="حفظ القرآن الكريم, دورة حفظ القرآن, تقنيات حفظ القرآن, تثبيت حفظ القرآن, طريقة حفظ القرآن السريع, M5 قرآن, كوتش أحمد قرآن"
+          path="/quran"
+          ogType="product"
+          jsonLd={quranJsonLd}
+        />
+      )}
+
       {/* 0. Charity Alert (Quran Only) */}
       {type === 'quran' && (
         <div className="bg-red-50 text-red-800 px-4 py-3 text-center border-b border-red-100 sticky top-20 z-40">

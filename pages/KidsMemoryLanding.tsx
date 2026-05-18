@@ -8,6 +8,33 @@ import {
   Check, X
 } from 'lucide-react';
 import OnboardingModal from '../components/OnboardingModal';
+import Seo from '../components/Seo';
+
+const kidsJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Course',
+    name: 'برنامج الذاكرة للأطفال',
+    description: 'تقنيات ممتعة وعلمية لتطوير ذاكرة طفلك وتحسين تركيزه وأدائه الدراسي. برنامج معتمد للأطفال من 6 إلى 14 سنة.',
+    provider: {
+      '@type': 'EducationalOrganization',
+      name: 'كوتش أحمد',
+      sameAs: 'https://website-dakiraty.vercel.app'
+    },
+    inLanguage: 'ar',
+    audience: {
+      '@type': 'EducationalAudience',
+      educationalRole: 'student',
+      audienceType: 'Children ages 6-14'
+    },
+    teaches: ['تقنيات الذاكرة للأطفال', 'تحسين التركيز', 'الحفظ السريع للدروس', 'مهارات التعلم'],
+    hasCourseInstance: {
+      '@type': 'CourseInstance',
+      courseMode: 'online',
+      inLanguage: 'ar'
+    }
+  }
+];
 
 const KidsMemoryLanding: React.FC = () => {
   const [parentType, setParentType] = useState<'father' | 'mother' | null>(null);
@@ -133,7 +160,15 @@ const KidsMemoryLanding: React.FC = () => {
 
   return (
     <div className="font-sans bg-[#F9FAFB] text-[#1A1A1A] relative min-h-screen" dir="rtl">
-      
+      <Seo
+        title="برنامج الذاكرة للأطفال | تقوية ذاكرة طفلك وتحسين تركيزه - كوتش أحمد"
+        description="برنامج علمي ممتع لتطوير ذاكرة طفلك وتحسين تركيزه وحفظه للدروس. تقنيات مثبتة للأطفال من 6-14 سنة، يطبقها طفلك في 15 دقيقة يومياً. سجل طفلك الآن."
+        keywords="ذاكرة الأطفال, تركيز الأطفال, تقوية ذاكرة طفلي, طفلي ينسى, حفظ الدروس للأطفال, برامج ذاكرة الأطفال المغرب, كوتش أحمد أطفال"
+        path="/kids-memory"
+        ogType="product"
+        jsonLd={kidsJsonLd}
+      />
+
       {/* Progress Bar */}
       <div className="fixed top-0 left-0 right-0 h-1 bg-gray-200 z-50">
         <div 

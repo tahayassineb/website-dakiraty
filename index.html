@@ -3,70 +3,85 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="منصة كوتش أحمد التعليمية - دورات تدريبية متخصصة في تقوية الذاكرة وحفظ القرآن الكريم باستخدام أحدث تقنيات علم الأعصاب." />
-    <title>Coach Ahmed</title>
-    
+    <meta name="theme-color" content="#1A4D8C" />
+
+    <!-- Primary SEO (per-page <Seo> overrides these at runtime) -->
+    <title>كوتش أحمد | تدريب الذاكرة وحفظ القرآن الكريم - المغرب والعالم العربي</title>
+    <meta name="description" content="منصة كوتش أحمد التعليمية - برامج تدريبية متخصصة لتقوية الذاكرة وحفظ القرآن الكريم باستخدام تقنيات أبطال العالم في الذاكرة وعلم الأعصاب الحديث. اشترك الآن." />
+    <meta name="keywords" content="كوتش أحمد, ذاكرتي, حفظ القرآن, تقوية الذاكرة, تدريب الذاكرة, تقنيات الحفظ, المغرب, دورات الذاكرة, طرق الحفظ السريع" />
+    <meta name="author" content="كوتش أحمد" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://website-dakiraty.vercel.app/" />
+
+    <!-- Multilingual / regional targeting -->
+    <link rel="alternate" hreflang="ar" href="https://website-dakiraty.vercel.app/" />
+    <link rel="alternate" hreflang="ar-MA" href="https://website-dakiraty.vercel.app/" />
+    <link rel="alternate" hreflang="x-default" href="https://website-dakiraty.vercel.app/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Coach Ahmed | كوتش أحمد" />
+    <meta property="og:locale" content="ar_MA" />
+    <meta property="og:locale:alternate" content="ar_AR" />
+    <meta property="og:url" content="https://website-dakiraty.vercel.app/" />
+    <meta property="og:title" content="كوتش أحمد | تدريب الذاكرة وحفظ القرآن الكريم" />
+    <meta property="og:description" content="برامج تدريبية لتقوية الذاكرة وحفظ القرآن الكريم بتقنيات أبطال العالم. أكثر من 5000 متدرب." />
+    <meta property="og:image" content="https://szyuhfwlwmmjjtbupmxf.supabase.co/storage/v1/object/public/chat-media/212632730020@s.whatsapp.net_1768925248390.jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="كوتش أحمد - مدرب الذاكرة" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="كوتش أحمد | تدريب الذاكرة وحفظ القرآن الكريم" />
+    <meta name="twitter:description" content="برامج تدريبية لتقوية الذاكرة وحفظ القرآن الكريم بتقنيات أبطال العالم." />
+    <meta name="twitter:image" content="https://szyuhfwlwmmjjtbupmxf.supabase.co/storage/v1/object/public/chat-media/212632730020@s.whatsapp.net_1768925248390.jpeg" />
+
     <!-- Preconnect to critical domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="dns-prefetch" href="https://szyuhfwlwmmjjtbupmxf.supabase.co">
 
     <!-- Preload Hero Image (LCP) -->
     <link rel="preload" as="image" href="https://szyuhfwlwmmjjtbupmxf.supabase.co/storage/v1/object/public/chat-media/212632730020@s.whatsapp.net_1768925248390.jpeg" fetchpriority="high">
-    
+
     <!-- Google Fonts: Cairo -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              'primary-blue': '#1A4D8C',
-              'accent-yellow': '#FFC107',
-              'dark-blue': '#0F2D54',
-              'light-gray': '#F3F4F6',
-            },
-            fontFamily: {
-              sans: ['Cairo', 'sans-serif'],
-            },
-          },
-        },
-      }
+
+    <link rel="stylesheet" href="/index.css">
+
+    <!-- Site-wide Organization JSON-LD (E-E-A-T signal for Google + AI engines) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "كوتش أحمد",
+      "alternateName": "Coach Ahmed",
+      "url": "https://website-dakiraty.vercel.app",
+      "logo": "https://website-dakiraty.vercel.app/logo.png",
+      "description": "منصة تعليمية متخصصة في تدريب الذاكرة وحفظ القرآن الكريم باستخدام تقنيات أبطال العالم في الذاكرة.",
+      "founder": {
+        "@type": "Person",
+        "name": "أحمد",
+        "jobTitle": "مدرب الذاكرة وبطل وطني سابق",
+        "description": "مدرب معتمد في مهارات الذاكرة والتعلم السريع، صاحب رقم قياسي في بطولة إفريقيا للذاكرة 2020."
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "MA"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+212-633-698-758",
+        "contactType": "customer service",
+        "email": "info@coachahmed.com",
+        "availableLanguage": ["Arabic", "ar-MA"]
+      },
+      "areaServed": ["MA", "DZ", "TN", "EG", "SA", "AE"],
+      "knowsLanguage": ["ar", "ar-MA"]
+    }
     </script>
-    <style>
-      body {
-        font-family: 'Cairo', sans-serif;
-      }
-      /* Hide scrollbar for Chrome, Safari and Opera */
-      .no-scrollbar::-webkit-scrollbar {
-          display: none;
-      }
-      /* Hide scrollbar for IE, Edge and Firefox */
-      .no-scrollbar {
-          -ms-overflow-style: none;  /* IE and Edge */
-          scrollbar-width: none;  /* Firefox */
-      }
-    </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@18.3.1?target=es2022",
-    "react/jsx-runtime": "https://esm.sh/react@18.3.1/jsx-runtime?target=es2022",
-    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client?target=es2022",
-    "react-dom": "https://esm.sh/react-dom@18.3.1?target=es2022",
-    "lucide-react": "https://esm.sh/lucide-react@0.344.0?target=es2022&deps=react@18.3.1",
-    "react-router-dom": "https://esm.sh/react-router-dom@6.22.3?target=es2022&deps=react@18.3.1,react-dom@18.3.1",
-    "react-scroll": "https://esm.sh/react-scroll@1.9.0?target=es2022&deps=react@18.3.1,react-dom@18.3.1",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
+
     <!-- Facebook Pixel Code -->
     <script>
       !function(f,b,e,v,n,t,s)
@@ -81,12 +96,12 @@
       fbq('track', 'PageView');
     </script>
     <!-- End Facebook Pixel Code -->
-</head>
+  </head>
   <body class="bg-gray-50 text-gray-800">
     <noscript><img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=1435549911489261&ev=PageView&noscript=1"
     /></noscript>
     <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
-</body>
+    <script type="module" src="/index.tsx"></script>
+  </body>
 </html>

@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { Link as ScrollLink } from 'react-scroll';
 import LiteYouTubeEmbed from '../components/LiteYouTubeEmbed';
+import Seo from '../components/Seo';
 
 declare global {
   interface Window {
@@ -468,10 +469,9 @@ const Offer: React.FC = () => {
 
         const fbp = getCookie('_fbp');
         const fbc = getCookie('_fbc');
-        const intakeUrl = import.meta.env.VITE_LEAD_INTAKE_URL?.trim() || 'https://adjoining-bee-105.eu-west-1.convex.site/intake/website';
         
         try {
-            const response = await fetch(intakeUrl, {
+            const response = await fetch('https://n8n.srv1041616.hstgr.cloud/webhook/49d1c69a-4b76-4f54-a078-b1e0428a7072', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -704,9 +704,77 @@ const DakiratyLanding: React.FC = () => {
     };
   }, []);
 
+  const dakiratyJsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Course',
+      name: 'برنامج ذاكرتي - تدريب الذاكرة الحديدية',
+      description: 'برنامج تدريبي مكثف لمدة 28 يوماً يجمع بين علم الأعصاب الحديث وتقنيات أبطال العالم في الذاكرة، لمضاعفة قدرتك على الحفظ والتركيز.',
+      provider: {
+        '@type': 'EducationalOrganization',
+        name: 'كوتش أحمد',
+        sameAs: 'https://website-dakiraty.vercel.app'
+      },
+      inLanguage: 'ar',
+      educationalLevel: 'Beginner to Advanced',
+      teaches: ['تقنيات الذاكرة', 'التركيز الذهني', 'الحفظ السريع', 'تقنيات M5', 'الخرائط الذهنية'],
+      offers: {
+        '@type': 'Offer',
+        price: '600',
+        priceCurrency: 'MAD',
+        availability: 'https://schema.org/InStock',
+        url: 'https://website-dakiraty.vercel.app/dakiraty'
+      },
+      hasCourseInstance: {
+        '@type': 'CourseInstance',
+        courseMode: 'online',
+        courseWorkload: 'PT28D',
+        inLanguage: 'ar'
+      }
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'هل الدورة مسجلة أم مباشرة؟',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'الدورة تجمع بين الاثنين. دروس مسجلة عالية الجودة، ولقاءات مباشرة أسبوعية للمتابعة.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'ماذا لو فاتني لقاء مباشر؟',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'جميع اللقاءات المباشرة تسجل وترفع على المنصة لتشاهدها في أي وقت.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'هل أحتاج مهارات سابقة؟',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'لا، نبدأ معك من الصفر.'
+          }
+        }
+      ]
+    }
+  ];
+
   return (
     <div className="flex flex-col min-h-screen font-sans" dir="rtl">
-      
+      <Seo
+        title="برنامج ذاكرتي | دورة تقوية الذاكرة في 28 يوم - كوتش أحمد"
+        description="انضم لبرنامج ذاكرتي الحديدية مع كوتش أحمد. منهجية علمية متكاملة لتقوية الذاكرة وتضاعف سرعة الحفظ 3 أضعاف في 28 يوم. لقاءات مباشرة، تطبيق ذكي، وضمان استرداد 7 أيام. السعر 600 درهم."
+        keywords="برنامج ذاكرتي, دورة الذاكرة, تقوية الذاكرة, تدريب الذاكرة المغرب, كوتش أحمد ذاكرتي, تقنيات الحفظ السريع, M5 تقنية, دورة الذاكرة 28 يوم"
+        path="/dakiraty"
+        ogType="product"
+        jsonLd={dakiratyJsonLd}
+      />
+
       {/* 1. Hero with VSL */}
       <Hero videoId={contentData.heroVideoId} />
       
