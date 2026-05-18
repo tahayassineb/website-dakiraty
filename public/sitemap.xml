@@ -131,4 +131,66 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
+  <!-- Phase 3.6 articles -->
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/tiqniyat-bumudoro-li-aldhakira</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/kayfa-tahfaz-mufradat-lugha-ajnabiyya</loc>
+    <lastmod>2026-05-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/alkortizol-wa-altawattur-wa-aldhakira</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/hifz-alquran-baada-alarbain</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/alhifz-almutqan-mukabil-alsathiy</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/kayfa-takhtar-shaykh-hifz-alquran</loc>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/mata-abdaa-tahfeez-alquran-litifli</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/kayfa-naj3al-tiflana-yuhibb-alquraa</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/altamul-wa-aldhakira</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/alshashashat-wa-aldhakira</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
