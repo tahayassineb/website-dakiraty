@@ -30,7 +30,7 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- Blog articles -->
+  <!-- Memory cluster articles -->
   <url>
     <loc>https://website-dakiraty.vercel.app/blog/kayfa-tuqawwi-dhakirataka-fi-30-yawm</loc>
     <lastmod>2026-05-12</lastmod>
@@ -44,10 +44,48 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://website-dakiraty.vercel.app/blog/afdal-12-taama-litaqwiyat-aldhakira</loc>
+    <lastmod>2026-01-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/munhana-alnisyan-wa-kayfa-tatghallab-alayh</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/khitat-7-ayyam-li-aldhakira-qabl-alimtihan</loc>
+    <lastmod>2026-05-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/kayfa-tahfaz-alasma-wa-alwujuh</loc>
+    <lastmod>2026-05-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/alnawm-wa-aldhakira-alalaqa-alkamila</loc>
+    <lastmod>2026-05-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/alriyada-wa-aldhakira-ay-riyada-tuqawwi-aldimagh</loc>
+    <lastmod>2026-03-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Quran cluster articles -->
+  <url>
     <loc>https://website-dakiraty.vercel.app/blog/kayfa-tahfaz-alquran-bisuraa-wa-thubut</loc>
     <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://website-dakiraty.vercel.app/blog/khams-akhta-tunsi-alquran</loc>
@@ -56,14 +94,40 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://website-dakiraty.vercel.app/blog/kayfa-tahfaz-surat-albaqara-fi-90-yawm</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/afdal-awqat-hifz-alquran</loc>
+    <lastmod>2026-04-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/kayfa-tahfaz-alquran-wa-anta-muwazzaf</loc>
+    <lastmod>2026-04-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Kids cluster articles -->
+  <url>
     <loc>https://website-dakiraty.vercel.app/blog/kayfa-tusaeid-tiflaka-ala-hifz-durusihi</loc>
     <lastmod>2026-02-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://website-dakiraty.vercel.app/blog/afdal-12-taama-litaqwiyat-aldhakira</loc>
-    <lastmod>2026-01-25</lastmod>
+    <loc>https://website-dakiraty.vercel.app/blog/alab-elmiyya-litaqwiyat-dhakirat-alatfal</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://website-dakiraty.vercel.app/blog/adhd-wa-alhifz-istiratijiyat-lilatfal</loc>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
