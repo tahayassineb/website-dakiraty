@@ -1,12 +1,22 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useQuery } from 'convex/react';
 import { Search, Calendar, Clock, Globe } from 'lucide-react';
 import Seo, { SITE_URL } from '../components/Seo';
-import { articlesFr, categoriesFr } from '../lib/articles';
+import { api } from '../convex/_generated/api';
 
 const BlogFr: React.FC = () => {
   const [query, setQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+
+  const articlesFr = useQuery(api.articles.list, { lang: 'fr' }) ?? [];
+  const categoriesFr = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const a of articlesFr) {
+      counts.set(a.category, (counts.get(a.category) || 0) + 1);
+    }
+    return Array.from(counts.entries()).map(([name, count]) => ({ name, count }));
+  }, [articlesFr]);
 
   const filtered = useMemo(() => {
     return articlesFr.filter((a) => {

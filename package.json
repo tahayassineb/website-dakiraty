@@ -7,9 +7,14 @@
     "dev": "vite",
     "build": "vite-react-ssg build",
     "build:spa": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "convex:dev": "convex dev",
+    "convex:deploy": "convex deploy",
+    "convex:migrate": "node scripts/migrate-to-convex.mjs"
   },
   "dependencies": {
+    "convex": "^1.16.0",
+    "gray-matter": "^4.0.3",
     "lucide-react": "0.344.0",
     "motion": "^12.34.3",
     "react": "^19.2.3",

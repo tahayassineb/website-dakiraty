@@ -1,16 +1,16 @@
 import type { RouteRecord } from 'vite-react-ssg';
 import Layout from './components/Layout';
-import { articleSlugs, articleSlugsFr } from './lib/articles';
 
 /**
  * Routes config for vite-react-ssg.
  *
- * Each route is prerendered to static HTML at build time so AI crawlers
- * (GPTBot, ClaudeBot, PerplexityBot) see real content, not an empty SPA shell.
+ * Static landing pages (/, /dakiraty, /quran, /about, etc.) are still
+ * prerendered to HTML at build time for SEO.
  *
- * `entry` hints which source file's CSS to inline per route (prevents FOUC).
- * Dynamic routes (`:slug`) use `getStaticPaths` so vite-react-ssg knows which
- * slugs to render.
+ * Blog pages (/blog, /blog/:slug, /fr/blog, /fr/blog/:slug) are dynamic —
+ * they fetch article content from Convex at runtime. This is a deliberate
+ * trade-off: edits in the admin panel appear on the live site instantly
+ * (no rebuild), but AI crawlers see less content per article.
  */
 export const routes: RouteRecord[] = [
   {
@@ -54,7 +54,6 @@ export const routes: RouteRecord[] = [
         path: 'blog/:slug',
         lazy: () => import('./pages/BlogPost').then((m) => ({ Component: m.default })),
         entry: 'pages/BlogPost.tsx',
-        getStaticPaths: () => articleSlugs,
       },
       {
         path: 'fr/blog',
@@ -71,7 +70,30 @@ export const routes: RouteRecord[] = [
           return { Component: BlogPostFr };
         },
         entry: 'pages/BlogPostFr.tsx',
-        getStaticPaths: () => articleSlugsFr,
+      },
+    ],
+  },
+  // ============================================================
+  // Admin tree — hidden from sitemap, blocked by robots.txt,
+  // noindex'd via Seo component. NOT prerendered (no SSG) since
+  // the content is dynamic (Convex-backed) and auth-gated.
+  // ============================================================
+  {
+    path: '/admin',
+    lazy: () => import('./components/AdminLayout').then((m) => ({ Component: m.default })),
+    entry: 'components/AdminLayout.tsx',
+    children: [
+      {
+        index: true,
+        lazy: () => import('./pages/Admin').then((m) => ({ Component: m.default })),
+      },
+      {
+        path: 'articles',
+        lazy: () => import('./pages/Admin').then((m) => ({ Component: m.AdminDashboard })),
+      },
+      {
+        path: 'edit/:id',
+        lazy: () => import('./pages/AdminEditor').then((m) => ({ Component: m.default })),
       },
     ],
   },

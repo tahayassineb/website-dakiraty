@@ -1,11 +1,12 @@
-import { useMemo } from 'react';
 import { Link, useParams, Navigate } from 'react-router-dom';
+import { useQuery } from 'convex/react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
 import { Calendar, Clock, ChevronLeft, ArrowLeft, Tag, User, Globe } from 'lucide-react';
 import Seo, { SITE_URL, DEFAULT_OG_IMAGE } from '../components/Seo';
-import { articlesFrBySlug, getRelatedArticles, Article } from '../lib/articles';
+import { api } from '../convex/_generated/api';
+import type { Article } from '../lib/articles';
 
 const ctaConfig: Record<Exclude<Article['cta'], 'none'>, {
   title: string;
@@ -39,14 +40,21 @@ const ctaConfig: Record<Exclude<Article['cta'], 'none'>, {
 
 const BlogPostFr: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const article = slug ? articlesFrBySlug.get(slug) : undefined;
 
-  const related = useMemo(
-    () => (article ? getRelatedArticles(article.related, 'fr').slice(0, 3) : []),
-    [article]
-  );
+  const article = useQuery(api.articles.getBySlug, slug ? { slug } : 'skip');
+  const related = useQuery(
+    api.articles.getBySlugs,
+    article ? { slugs: article.related.slice(0, 3) } : 'skip'
+  ) ?? [];
 
-  if (!article) {
+  if (article === undefined) {
+    return (
+      <div className="bg-gray-50 min-h-screen flex items-center justify-center" dir="ltr">
+        <div className="text-gray-500 animate-pulse">Loading...</div>
+      </div>
+    );
+  }
+  if (article === null) {
     return <Navigate to="/fr/blog" replace />;
   }
 

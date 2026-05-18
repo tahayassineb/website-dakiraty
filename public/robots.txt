@@ -4,6 +4,8 @@
 User-agent: *
 Allow: /
 Disallow: /api/
+Disallow: /admin
+Disallow: /admin/
 
 # AI crawlers - explicitly allowed (GEO / AI search visibility)
 User-agent: GPTBot
