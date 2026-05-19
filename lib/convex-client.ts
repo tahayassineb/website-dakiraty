@@ -10,10 +10,9 @@ import { ConvexReactClient } from "convex/react";
 
 const CONVEX_URL = import.meta.env.VITE_CONVEX_URL;
 
-export const convexClient =
-  typeof window !== "undefined" && CONVEX_URL
-    ? new ConvexReactClient(CONVEX_URL)
-    : null;
+export const convexClient = CONVEX_URL
+  ? new ConvexReactClient(CONVEX_URL)
+  : null;
 
 export const ADMIN_TOKEN_KEY = "dakiraty_admin_token";
 
