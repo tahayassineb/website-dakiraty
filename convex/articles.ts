@@ -191,6 +191,55 @@ export const remove = mutation({
 });
 
 // ============================================================
+// Agent bulk create — called by the daily scheduled writer agent.
+// Gated by AGENT_SECRET env var (set in Convex dashboard, never in code).
+// This bypasses the session-based admin auth because the agent runs
+// unattended in Anthropic's cloud and has no admin login.
+// ============================================================
+
+export const agentBulkCreate = mutation({
+  args: {
+    secret: v.string(),
+    articles: v.array(v.object(articleFields)),
+  },
+  handler: async (ctx, { secret, articles }) => {
+    const expected = process.env.AGENT_SECRET;
+    if (!expected) {
+      throw new Error(
+        "AGENT_SECRET env var not configured in Convex dashboard"
+      );
+    }
+    if (secret !== expected) {
+      throw new Error("Unauthorized");
+    }
+
+    let inserted = 0;
+    let skipped = 0;
+    const insertedSlugs: string[] = [];
+
+    for (const a of articles) {
+      const existing = await ctx.db
+        .query("articles")
+        .withIndex("by_slug", (q) => q.eq("slug", a.slug))
+        .first();
+      if (existing) {
+        skipped++;
+        continue;
+      }
+      await ctx.db.insert("articles", {
+        ...a,
+        isPublished: true,
+        lastEditedAt: Date.now(),
+      });
+      inserted++;
+      insertedSlugs.push(a.slug);
+    }
+
+    return { inserted, skipped, insertedSlugs };
+  },
+});
+
+// ============================================================
 // Bulk import — used once during migration from .md files
 // ============================================================
 
