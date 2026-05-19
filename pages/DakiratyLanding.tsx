@@ -469,9 +469,10 @@ const Offer: React.FC = () => {
 
         const fbp = getCookie('_fbp');
         const fbc = getCookie('_fbc');
+        const intakeUrl = import.meta.env.VITE_LEAD_INTAKE_URL?.trim() || 'https://adjoining-bee-105.eu-west-1.convex.site/intake/website';
         
         try {
-            const response = await fetch('https://n8n.srv1041616.hstgr.cloud/webhook/49d1c69a-4b76-4f54-a078-b1e0428a7072', {
+            const response = await fetch(intakeUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
