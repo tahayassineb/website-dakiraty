@@ -5,7 +5,8 @@
     { "source": "/admin", "destination": "/" },
     { "source": "/admin/:path*", "destination": "/" },
     { "source": "/blog/:slug", "destination": "/" },
-    { "source": "/fr/blog/:slug", "destination": "/" }
+    { "source": "/fr/blog/:slug", "destination": "/" },
+    { "source": "/:path*", "destination": "/" }
   ],
   "headers": [
     {
