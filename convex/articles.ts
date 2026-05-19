@@ -61,9 +61,12 @@ export const getBySlug = query({
 export const listSlugs = query({
   args: { lang: v.optional(langValidator) },
   handler: async (ctx, { lang }) => {
-    let q = ctx.db.query("articles");
-    if (lang) q = q.withIndex("by_lang_date", (idx) => idx.eq("lang", lang));
-    const docs = await q.collect();
+    const docs = lang
+      ? await ctx.db
+          .query("articles")
+          .withIndex("by_lang_date", (idx) => idx.eq("lang", lang))
+          .collect()
+      : await ctx.db.query("articles").collect();
     return docs.map((d) => ({ slug: d.slug, lang: d.lang }));
   },
 });
