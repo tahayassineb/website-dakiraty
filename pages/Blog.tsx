@@ -29,7 +29,7 @@ const Blog: React.FC = () => {
       const matchesCategory = !activeCategory || a.category === activeCategory;
       return matchesQuery && matchesCategory;
     });
-  }, [query, activeCategory]);
+  }, [articles, query, activeCategory]);
 
   const featured = articles[0];
   const rest = filtered.filter((a) => !featured || a.slug !== featured.slug);
