@@ -8,6 +8,7 @@
  * @module
  */
 
+import type * as _seed from "../_seed.js";
 import type * as articles from "../articles.js";
 import type * as auth from "../auth.js";
 import type * as images from "../images.js";
@@ -19,6 +20,7 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  _seed: typeof _seed;
   articles: typeof articles;
   auth: typeof auth;
   images: typeof images;

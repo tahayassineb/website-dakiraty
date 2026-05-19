@@ -1,6 +1,11 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    { "source": "/admin/:path*", "destination": "/index.html" },
+    { "source": "/blog/:slug", "destination": "/index.html" },
+    { "source": "/fr/blog/:slug", "destination": "/index.html" }
+  ],
   "headers": [
     {
       "source": "/robots.txt",

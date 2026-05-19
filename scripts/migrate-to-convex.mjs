@@ -2,12 +2,7 @@
  * One-time migration: import all .md articles into Convex.
  *
  * Usage:
- *   1. Ensure Convex is set up: `npx convex dev` running once to deploy schema/functions
- *   2. Login via the admin panel at least once to get a session token
- *   3. Set env vars and run this script:
- *        ADMIN_TOKEN=<token-from-localStorage>           \
- *        VITE_CONVEX_URL=https://your-deployment.convex.cloud \
- *        node scripts/migrate-to-convex.mjs
+ *   VITE_CONVEX_URL=https://your-deployment.convex.cloud node scripts/migrate-to-convex.mjs
  *
  * Reads:
  *   - content/blog/*.md (Arabic articles)
@@ -16,6 +11,7 @@
  * Writes: each article into Convex via api.articles.bulkImport
  *
  * Safe to re-run: bulkImport skips slugs that already exist.
+ * First run does NOT require an admin token (bootstrap mode when DB is empty).
  */
 
 import { readdir, readFile } from "node:fs/promises";
@@ -29,16 +25,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = join(__dirname, "..");
 
 const CONVEX_URL = process.env.VITE_CONVEX_URL;
-const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
 
 if (!CONVEX_URL) {
   console.error("ERROR: VITE_CONVEX_URL env var is required.");
   console.error("Find it in .env.local after running `npx convex dev`.");
-  process.exit(1);
-}
-if (!ADMIN_TOKEN) {
-  console.error("ERROR: ADMIN_TOKEN env var is required.");
-  console.error("Log in via the admin panel, then copy the token from localStorage 'admin_token'.");
   process.exit(1);
 }
 
@@ -107,15 +97,14 @@ async function main() {
   const all = [...arArticles, ...frArticles];
   console.log(`\n🚀 Importing ${all.length} articles into Convex...`);
 
-  // Convex mutations have a 16MB arg size limit. Batch by 10 to be safe.
-  const BATCH_SIZE = 10;
+  // Convex mutations have a 16MB arg size limit. 29 articles easily fit in one call.
+  const BATCH_SIZE = 100;
   let totalInserted = 0;
   let totalSkipped = 0;
 
   for (let i = 0; i < all.length; i += BATCH_SIZE) {
     const batch = all.slice(i, i + BATCH_SIZE);
     const result = await client.mutation(api.articles.bulkImport, {
-      token: ADMIN_TOKEN,
       articles: batch,
     });
     totalInserted += result.inserted;

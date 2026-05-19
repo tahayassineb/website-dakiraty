@@ -196,11 +196,18 @@ export const remove = mutation({
 
 export const bulkImport = mutation({
   args: {
-    token: v.string(),
+    token: v.optional(v.string()),
     articles: v.array(v.object(articleFields)),
   },
   handler: async (ctx, { token, articles }) => {
-    await requireAuth(ctx, token);
+    // Allow unauthenticated import only when the articles table is empty
+    // (first-run migration). Once articles exist, require auth.
+    const anyArticle = await ctx.db.query("articles").first();
+    if (anyArticle) {
+      if (!token) throw new Error("Unauthorized");
+      await requireAuth(ctx, token);
+    }
+
     let inserted = 0;
     let skipped = 0;
     for (const a of articles) {

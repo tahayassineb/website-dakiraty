@@ -41,6 +41,17 @@ export default defineSchema({
     .index("by_lang_date", ["lang", "date"]),
 
   /**
+   * Admin users. Passwords are hashed with PBKDF2 (120k iterations, SHA-256).
+   * First user is created automatically on first login (bootstrap).
+   */
+  users: defineTable({
+    email: v.string(),
+    passwordHash: v.string(),
+    role: v.union(v.literal("admin")),
+    createdAt: v.number(),
+  }).index("by_email", ["email"]),
+
+  /**
    * Admin auth sessions. Created on login, validated on every protected request.
    * Simple bearer-token model — token stored client-side in localStorage.
    */
