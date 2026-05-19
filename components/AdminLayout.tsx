@@ -12,10 +12,10 @@ const AdminShell: React.FC = () => {
   const navigate = useNavigate();
   const [hasToken, setHasToken] = useState<boolean | null>(null);
 
-  // Initial check: hydrate from localStorage
+  // Re-check token on every render so it stays in sync after login
   useEffect(() => {
     setHasToken(!!getAdminToken());
-  }, []);
+  }, [token]);
 
   const token = typeof window !== 'undefined' ? getAdminToken() : null;
 

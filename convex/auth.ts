@@ -229,6 +229,40 @@ export const verify = query({
  * Internal helper used by mutations/actions to throw if the caller isn't authed.
  * Pattern: `await requireAuth(ctx, args.token)`
  */
+/**
+ * Seed or update the admin user. Safe to re-run — overwrites existing admin.
+ * Run once from CLI: npx convex run auth:seedAdmin
+ */
+export const seedAdmin = mutation({
+  args: {
+    email: v.string(),
+    password: v.string(),
+  },
+  handler: async (ctx, { email, password }) => {
+    const normalizedEmail = normalizeEmail(email);
+    const passwordHash = await hashPassword(password);
+
+    const existing = await ctx.db
+      .query("users")
+      .withIndex("by_email", (q) => q.eq("email", normalizedEmail))
+      .first();
+
+    if (existing) {
+      await ctx.db.patch(existing._id, { passwordHash });
+      return { action: "updated", email: normalizedEmail };
+    }
+
+    await ctx.db.insert("users", {
+      email: normalizedEmail,
+      passwordHash,
+      role: "admin",
+      createdAt: Date.now(),
+    });
+
+    return { action: "created", email: normalizedEmail };
+  },
+});
+
 export const requireAuth = internalQuery({
   args: { token: v.string() },
   handler: async (ctx, { token }) => {
