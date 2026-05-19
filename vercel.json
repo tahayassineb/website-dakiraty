@@ -1,20 +1,20 @@
 {
-  "version": 2,
-  "routes": [
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/admin", "destination": "/index.html" },
+    { "source": "/admin/:path*", "destination": "/index.html" },
+    { "source": "/blog/:slug", "destination": "/index.html" },
+    { "source": "/fr/blog/:slug", "destination": "/index.html" }
+  ],
+  "headers": [
     {
-      "src": "/robots.txt",
-      "headers": [{ "key": "Content-Type", "value": "text/plain; charset=utf-8" }],
-      "continue": true
+      "source": "/robots.txt",
+      "headers": [{ "key": "Content-Type", "value": "text/plain; charset=utf-8" }]
     },
     {
-      "src": "/sitemap.xml",
-      "headers": [{ "key": "Content-Type", "value": "application/xml; charset=utf-8" }],
-      "continue": true
-    },
-    { "handle": "filesystem" },
-    { "src": "/admin", "dest": "/index.html" },
-    { "src": "/admin/(.*)", "dest": "/index.html" },
-    { "src": "/blog/([^/]+)", "dest": "/index.html" },
-    { "src": "/fr/blog/([^/]+)", "dest": "/index.html" }
+      "source": "/sitemap.xml",
+      "headers": [{ "key": "Content-Type", "value": "application/xml; charset=utf-8" }]
+    }
   ]
 }
