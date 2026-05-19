@@ -11,13 +11,12 @@ const AdminShell: React.FC = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [hasToken, setHasToken] = useState<boolean | null>(null);
+  const token = typeof window !== 'undefined' ? getAdminToken() : null;
 
   // Re-check token on every render so it stays in sync after login
   useEffect(() => {
     setHasToken(!!getAdminToken());
   }, [token]);
-
-  const token = typeof window !== 'undefined' ? getAdminToken() : null;
 
   // Validate token with Convex (returns undefined while loading, then { valid: bool })
   const verification = useQuery(api.auth.verify, token ? { token } : 'skip');
