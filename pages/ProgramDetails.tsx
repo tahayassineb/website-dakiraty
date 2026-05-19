@@ -104,14 +104,11 @@ const ProgramDetails: React.FC<ProgramDetailsProps> = ({ type }) => {
     
     setStatus('submitting');
 
-    const webhookUrl = type === 'quran' 
-        ? 'https://n8n.srv1041616.hstgr.cloud/webhook/3e8f8f74-a09d-4175-b556-406519e19a08' 
-        : ''; // Fallback if needed for other types
+    const intakeUrl = import.meta.env.VITE_LEAD_INTAKE_URL?.trim() || 'https://adjoining-bee-105.eu-west-1.convex.site/intake/website';
 
-    if (!webhookUrl) {
-         // If no webhook is configured for this type, just mock success
-         setTimeout(() => setStatus('success'), 1000);
-         return;
+    if (!intakeUrl) {
+        setStatus('error');
+        return;
     }
 
     // Generate Event ID for deduplication
@@ -130,7 +127,7 @@ const ProgramDetails: React.FC<ProgramDetailsProps> = ({ type }) => {
     const fbc = getCookie('_fbc');
 
     try {
-        const response = await fetch(webhookUrl, {
+        const response = await fetch(intakeUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
