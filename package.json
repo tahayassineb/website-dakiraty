@@ -13,6 +13,7 @@
     "convex:migrate": "node scripts/migrate-to-convex.mjs"
   },
   "dependencies": {
+    "@vercel/speed-insights": "^2.0.0",
     "convex": "^1.16.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "0.344.0",
