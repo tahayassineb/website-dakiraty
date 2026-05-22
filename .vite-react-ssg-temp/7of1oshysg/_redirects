@@ -1,0 +1,7 @@
+# With Phase 2 SSG, each route now has its own prerendered HTML file
+# (dist/dakiraty/index.html, dist/quran/index.html, etc.) — so Netlify
+# serves them directly. No SPA catch-all needed.
+#
+# If a route is hit that wasn't prerendered, fall back to index.html and
+# let client-side React Router handle it.
+/*    /index.html   200
