@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import ConvexClientProvider from './ConvexClientProvider';
@@ -21,6 +22,7 @@ const Layout: React.FC = () => {
         </main>
         <Footer />
         <Analytics />
+        <SpeedInsights />
       </div>
     </ConvexClientProvider>
   );
