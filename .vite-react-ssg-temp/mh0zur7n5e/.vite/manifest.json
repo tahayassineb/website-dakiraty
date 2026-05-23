@@ -1,0 +1,175 @@
+{
+  "_LiteYouTubeEmbed-CWqo_Vmb.js": {
+    "file": "assets/LiteYouTubeEmbed-CWqo_Vmb.js",
+    "name": "LiteYouTubeEmbed"
+  },
+  "_Seo-RAKbgilb.js": {
+    "file": "assets/Seo-RAKbgilb.js",
+    "name": "Seo"
+  },
+  "_api-jI3mfyCn.js": {
+    "file": "assets/api-jI3mfyCn.js",
+    "name": "api"
+  },
+  "_convex-client-MQY61BTd.js": {
+    "file": "assets/convex-client-MQY61BTd.js",
+    "name": "convex-client"
+  },
+  "components/AdminLayout.tsx": {
+    "file": "assets/AdminLayout-CUSM_Yfc.js",
+    "name": "AdminLayout",
+    "src": "components/AdminLayout.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.tsx",
+      "_Seo-RAKbgilb.js",
+      "_api-jI3mfyCn.js",
+      "_convex-client-MQY61BTd.js"
+    ]
+  },
+  "index.tsx": {
+    "file": "index.mjs",
+    "name": "index",
+    "src": "index.tsx",
+    "isEntry": true,
+    "dynamicImports": [
+      "pages/Home.tsx",
+      "pages/DakiratyLanding.tsx",
+      "pages/ProgramDetails.tsx",
+      "pages/KidsMemoryLanding.tsx",
+      "pages/Blog.tsx",
+      "pages/Home.tsx",
+      "pages/DakiratyLanding.tsx",
+      "pages/ProgramDetails.tsx",
+      "pages/Blog.tsx",
+      "pages/Home.tsx",
+      "pages/DakiratyLanding.tsx",
+      "pages/ProgramDetails.tsx",
+      "pages/KidsMemoryLanding.tsx",
+      "pages/About.tsx",
+      "pages/Blog.tsx",
+      "pages/BlogPost.tsx",
+      "pages/BlogFr.tsx",
+      "pages/BlogPostFr.tsx",
+      "components/AdminLayout.tsx",
+      "pages/Admin.tsx",
+      "pages/Admin.tsx",
+      "pages/AdminEditor.tsx"
+    ]
+  },
+  "pages/About.tsx": {
+    "file": "assets/About-5T2J8fWh.js",
+    "name": "About",
+    "src": "pages/About.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_Seo-RAKbgilb.js"
+    ]
+  },
+  "pages/Admin.tsx": {
+    "file": "assets/Admin-Bxt9ByCw.js",
+    "name": "Admin",
+    "src": "pages/Admin.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_api-jI3mfyCn.js",
+      "_convex-client-MQY61BTd.js"
+    ]
+  },
+  "pages/AdminEditor.tsx": {
+    "file": "assets/AdminEditor-B3-vDOhz.js",
+    "name": "AdminEditor",
+    "src": "pages/AdminEditor.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_api-jI3mfyCn.js",
+      "_convex-client-MQY61BTd.js"
+    ]
+  },
+  "pages/Blog.tsx": {
+    "file": "assets/Blog-DOgmoOxh.js",
+    "name": "Blog",
+    "src": "pages/Blog.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_Seo-RAKbgilb.js",
+      "_api-jI3mfyCn.js"
+    ]
+  },
+  "pages/BlogFr.tsx": {
+    "file": "assets/BlogFr-W374MVIr.js",
+    "name": "BlogFr",
+    "src": "pages/BlogFr.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_Seo-RAKbgilb.js",
+      "_api-jI3mfyCn.js"
+    ]
+  },
+  "pages/BlogPost.tsx": {
+    "file": "assets/BlogPost-B-40a7v_.js",
+    "name": "BlogPost",
+    "src": "pages/BlogPost.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_Seo-RAKbgilb.js",
+      "_api-jI3mfyCn.js"
+    ]
+  },
+  "pages/BlogPostFr.tsx": {
+    "file": "assets/BlogPostFr-B7YQjAAr.js",
+    "name": "BlogPostFr",
+    "src": "pages/BlogPostFr.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_Seo-RAKbgilb.js",
+      "_api-jI3mfyCn.js"
+    ]
+  },
+  "pages/DakiratyLanding.tsx": {
+    "file": "assets/DakiratyLanding-L0gwtWBt.js",
+    "name": "DakiratyLanding",
+    "src": "pages/DakiratyLanding.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_LiteYouTubeEmbed-CWqo_Vmb.js",
+      "_Seo-RAKbgilb.js"
+    ]
+  },
+  "pages/Home.tsx": {
+    "file": "assets/Home-8NExGGvL.js",
+    "name": "Home",
+    "src": "pages/Home.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_Seo-RAKbgilb.js"
+    ],
+    "dynamicImports": [
+      "pages/DakiratyLanding.tsx",
+      "pages/ProgramDetails.tsx"
+    ]
+  },
+  "pages/KidsMemoryLanding.tsx": {
+    "file": "assets/KidsMemoryLanding-CqbVj6Y5.js",
+    "name": "KidsMemoryLanding",
+    "src": "pages/KidsMemoryLanding.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_Seo-RAKbgilb.js"
+    ]
+  },
+  "pages/ProgramDetails.tsx": {
+    "file": "assets/ProgramDetails-B9MA60qD.js",
+    "name": "ProgramDetails",
+    "src": "pages/ProgramDetails.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_LiteYouTubeEmbed-CWqo_Vmb.js",
+      "_Seo-RAKbgilb.js"
+    ]
+  },
+  "style.css": {
+    "file": "assets/style-D7PRZWR1.css",
+    "src": "style.css"
+  }
+}
