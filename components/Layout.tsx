@@ -4,12 +4,15 @@ import { Analytics } from '@vercel/analytics/react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import ConvexClientProvider from './ConvexClientProvider';
+import { trackProgramPageView } from '../lib/metaTracking';
 
 const Layout: React.FC = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const program=pathname==='/dakiraty'?'dakiraty':pathname==='/quran'?'quran':pathname==='/kids-memory'?'kids_memory':'website';
+    trackProgramPageView(program);
   }, [pathname]);
 
   return (

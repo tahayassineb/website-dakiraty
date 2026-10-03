@@ -11,6 +11,11 @@ export default defineConfig(({ mode }) => {
         host: '0.0.0.0',
       },
       plugins: [react(), tailwindcss()],
+      // Blog and admin pages depend on browser Convex queries; keep them dynamic.
+      ssgOptions: {
+        includedRoutes: (paths: string[]) => paths.filter((route) =>
+          !/^(?:\/)?(?:admin|blog|fr\/blog)(?:\/|$)/.test(route)),
+      },
       build: {
         target: 'esnext',
       },

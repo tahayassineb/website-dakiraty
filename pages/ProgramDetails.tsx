@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { submitWebsiteLead, trackProgramPageView, type PendingConversion } from '../lib/metaTracking';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Check, X, ChevronDown, ChevronUp, Clock, Video, Book, Award, ShieldCheck, 
   Brain, AlertOctagon, XCircle, CheckCircle, CloudFog, Sun, Smartphone, Users, ArrowLeft, MessageCircle, Heart, Star, Globe
@@ -14,9 +15,6 @@ declare global {
     _fbq: any;
   }
 }
-
-const DAKIRATY_PIXEL_ID = '1971224763824220';
-const QURAN_PIXEL_ID = '1435549911489261';
 
 interface ProgramDetailsProps {
   type: 'dakiraty' | 'quran';
@@ -48,37 +46,8 @@ const ProgramDetails: React.FC<ProgramDetailsProps> = ({ type }) => {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [validationError, setValidationError] = useState<string | null>(null);
 
-  // Determine the correct Pixel ID based on the program type
-  const currentPixelId = type === 'quran' ? QURAN_PIXEL_ID : DAKIRATY_PIXEL_ID;
-
-  useEffect(() => {
-    // Inject Meta Pixel
-    if (typeof window !== 'undefined') {
-      const w = window as any;
-      if (!w.fbq) {
-        let n: any;
-        n = w.fbq = function() {
-            // eslint-disable-next-line prefer-rest-params
-            n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-        };
-        if (!w._fbq) w._fbq = n;
-        n.push = n;
-        n.loaded = true;
-        n.version = '2.0';
-        n.queue = [];
-        const t = document.createElement('script');
-        t.async = true;
-        t.src = 'https://connect.facebook.net/en_US/fbevents.js';
-        const s = document.getElementsByTagName('script')[0];
-        if (s && s.parentNode) {
-            s.parentNode.insertBefore(t, s);
-        }
-      }
-      
-      window.fbq('init', currentPixelId);
-      window.fbq('track', 'PageView');
-    }
-  }, [currentPixelId]);
+  const conversion=useRef<PendingConversion|null>(null);
+  useEffect(() => { trackProgramPageView(type); }, [type]);
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPhone(e.target.value);
@@ -104,71 +73,11 @@ const ProgramDetails: React.FC<ProgramDetailsProps> = ({ type }) => {
     
     setStatus('submitting');
 
-    const intakeUrl = import.meta.env.VITE_LEAD_INTAKE_URL?.trim() || 'https://adjoining-bee-105.eu-west-1.convex.site/intake/website';
-
-    if (!intakeUrl) {
-        setStatus('error');
-        return;
-    }
-
-    // Generate Event ID for deduplication
-    const eventId = `lead_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
-
-    // Extract Meta Cookies for CAPI
-    const getCookie = (name: string) => {
-        if (typeof document === 'undefined') return '';
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop()?.split(';').shift() || '';
-        return '';
-    };
-
-    const fbp = getCookie('_fbp');
-    const fbc = getCookie('_fbc');
-
     try {
-        const response = await fetch(intakeUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                // Form Data
-                name: formData.name,
-                email: formData.email,
-                phone: phone,
-                program: type,
-                form: type === 'quran' ? 'quran_landing' : 'program_details',
-                
-                // CAPI Payload
-                event_name: 'Lead', // Changed to Lead
-                event_id: eventId,
-                event_source_url: window.location.href,
-                fbp: fbp,
-                fbc: fbc,
-                user_agent: navigator.userAgent,
-                event_time: Math.floor(Date.now() / 1000)
-            }),
-        });
-
-        if (response.ok) {
-            setStatus('success');
-            setFormData({ name: '', email: '' });
-            setPhone('');
-
-            if (window.fbq) {
-                window.fbq('track', 'Lead', { // Changed to Lead
-                    content_name: type === 'quran' ? 'Quran Program' : 'Program',
-                    value: type === 'quran' ? 200 : 0,
-                    currency: 'MAD'
-                }, { eventID: eventId });
-            }
-        } else {
-            setStatus('error');
-        }
+      await submitWebsiteLead(type,{name:formData.name,email:formData.email,phone},conversion);
+      setStatus('success');setFormData({name:'',email:''});setPhone('');
     } catch (error) {
-        console.error('Submission error:', error);
-        setStatus('error');
+      console.error('Submission error:',error);setStatus('error');
     }
   };
 

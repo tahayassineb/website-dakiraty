@@ -1,3 +1,4 @@
+import { trackProgramPageView } from '../lib/metaTracking';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
@@ -52,32 +53,7 @@ const KidsMemoryLanding: React.FC = () => {
       setShowSplash(false);
     }
 
-    // Inject Meta Pixel
-    if (typeof window !== 'undefined') {
-      const w = window as any;
-      if (!w.fbq) {
-        let n: any;
-        n = w.fbq = function() {
-            // eslint-disable-next-line prefer-rest-params
-            n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-        };
-        if (!w._fbq) w._fbq = n;
-        n.push = n;
-        n.loaded = true;
-        n.version = '2.0';
-        n.queue = [];
-        const t = document.createElement('script');
-        t.async = true;
-        t.src = 'https://connect.facebook.net/en_US/fbevents.js';
-        const s = document.getElementsByTagName('script')[0];
-        if (s && s.parentNode) {
-            s.parentNode.insertBefore(t, s);
-        }
-      }
-      
-      (window as any).fbq('init', '1435549911489261');
-      (window as any).fbq('track', 'PageView');
-    }
+    trackProgramPageView('kids_memory');
 
     const handleScroll = () => {
       const totalScroll = document.documentElement.scrollTop;
