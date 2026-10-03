@@ -1,14 +1,18 @@
 import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import ConvexClientProvider from './ConvexClientProvider';
+import { trackProgramPageView } from '../lib/metaTracking';
 
 const Layout: React.FC = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const program=pathname==='/dakiraty'?'dakiraty':pathname==='/quran'?'quran':pathname==='/kids-memory'?'kids_memory':'website';
+    trackProgramPageView(program);
   }, [pathname]);
 
   return (
@@ -19,6 +23,7 @@ const Layout: React.FC = () => {
           <Outlet />
         </main>
         <Footer />
+        <Analytics />
       </div>
     </ConvexClientProvider>
   );

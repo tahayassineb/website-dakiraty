@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { submitWebsiteLead, type PendingConversion } from '../lib/metaTracking';
+import React, { useState, useRef } from 'react';
 import { X, ArrowRight, Check, Phone, MessageCircle } from 'lucide-react';
 
 interface OnboardingModalProps {
@@ -17,6 +18,7 @@ export default function OnboardingModal({ isOpen, onClose }: OnboardingModalProp
     contactMethod: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const conversion = useRef<PendingConversion|null>(null);
 
   if (!isOpen) return null;
 
@@ -33,55 +35,10 @@ export default function OnboardingModal({ isOpen, onClose }: OnboardingModalProp
     setFormData(finalData);
     setIsSubmitting(true);
 
-    // Extract Meta Cookies for CAPI
-    const getCookie = (name: string) => {
-      if (typeof document === 'undefined') return '';
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop()?.split(';').shift() || '';
-      return '';
-    };
-
-    const fbp = getCookie('_fbp');
-    const fbc = getCookie('_fbc');
-    const eventId = `lead_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
-    const intakeUrl = import.meta.env.VITE_LEAD_INTAKE_URL?.trim() || 'https://adjoining-bee-105.eu-west-1.convex.site/intake/website';
-
     try {
-      await fetch(intakeUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          // Map to standard fields while keeping specific ones
-          name: finalData.parentName,
-          phone: finalData.whatsapp,
-          parentName: finalData.parentName,
-          whatsapp: finalData.whatsapp,
-          childName: finalData.childName,
-          childAge: finalData.childAge,
-          problem: finalData.problem,
-          contactMethod: finalData.contactMethod,
-          
-          // Meta CAPI Fields
-          program: "kids_memory",
-          form: "kids_memory_landing",
-          event_name: "Lead",
-          event_id: eventId,
-          event_source_url: window.location.href,
-          user_agent: navigator.userAgent,
-          event_time: Math.floor(Date.now() / 1000),
-          fbp,
-          fbc
-        }),
-      });
-      
-      // Track Lead event with Facebook Pixel
-      if (typeof window !== 'undefined' && (window as any).fbq) {
-        (window as any).fbq('track', 'Lead', { eventID: eventId });
-      }
-      
+      await submitWebsiteLead('kids_memory', {
+        name:finalData.parentName,phone:finalData.whatsapp,...finalData,
+      },conversion);
       setStep(6);
     } catch (error) {
       console.error('Error submitting form:', error);

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { submitWebsiteLead, trackProgramPageView, type PendingConversion } from '../lib/metaTracking';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Check, X, Star, ChevronDown, ChevronUp, Users, Award, 
   ShieldCheck, Brain, Video, Smartphone, MessageCircle, ArrowLeft,
@@ -37,7 +38,7 @@ const contentData = {
   ]
 };
 
-const PIXEL_ID = '1971224763824220';
+
 
 // --- Sub-Components ---
 
@@ -423,6 +424,7 @@ const Logistics: React.FC = () => {
 }
 
 const Offer: React.FC = () => {
+    const conversion=useRef<PendingConversion|null>(null);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -455,64 +457,10 @@ const Offer: React.FC = () => {
 
         setStatus('submitting');
 
-        // Generate Event ID for deduplication
-        const eventId = `lead_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
-
-        // Extract Meta Cookies for CAPI
-        const getCookie = (name: string) => {
-            if (typeof document === 'undefined') return '';
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) return parts.pop()?.split(';').shift() || '';
-            return '';
-        };
-
-        const fbp = getCookie('_fbp');
-        const fbc = getCookie('_fbc');
-        const intakeUrl = import.meta.env.VITE_LEAD_INTAKE_URL?.trim() || 'https://adjoining-bee-105.eu-west-1.convex.site/intake/website';
-        
         try {
-            const response = await fetch(intakeUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    // Form Data
-                    name: formData.name,
-                    email: formData.email,
-                    phone: formData.phone,
-                    form: 'dakiraty_landing',
-                    
-                    // CAPI Payload
-                    event_name: 'Lead', // Changed to Lead
-                    event_id: eventId,
-                    event_source_url: window.location.href,
-                    fbp: fbp,
-                    fbc: fbc,
-                    user_agent: navigator.userAgent,
-                    event_time: Math.floor(Date.now() / 1000)
-                }),
-            });
-
-            if (response.ok) {
-                setStatus('success');
-                setFormData({ name: '', email: '', phone: '' });
-                
-                if (window.fbq) {
-                    window.fbq('track', 'Lead', { // Changed to Lead
-                        content_name: 'Dakiraty Program',
-                        value: 600,
-                        currency: 'MAD'
-                    }, { eventID: eventId });
-                }
-            } else {
-                setStatus('error');
-            }
-        } catch (error) {
-            console.error(error);
-            setStatus('error');
-        }
+            await submitWebsiteLead('dakiraty',formData,conversion);
+            setStatus('success');setFormData({name:'',email:'',phone:''});
+        } catch(error) {console.error(error);setStatus('error');}
     };
 
     return (
@@ -670,32 +618,7 @@ const DakiratyLanding: React.FC = () => {
     link.fetchPriority = 'high';
     document.head.appendChild(link);
 
-    // 2. Inject Meta Pixel
-    if (typeof window !== 'undefined') {
-      const w = window as any;
-      if (!w.fbq) {
-        let n: any;
-        n = w.fbq = function() {
-            // eslint-disable-next-line prefer-rest-params
-            n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-        };
-        if (!w._fbq) w._fbq = n;
-        n.push = n;
-        n.loaded = true;
-        n.version = '2.0';
-        n.queue = [];
-        const t = document.createElement('script');
-        t.async = true;
-        t.src = 'https://connect.facebook.net/en_US/fbevents.js';
-        const s = document.getElementsByTagName('script')[0];
-        if (s && s.parentNode) {
-            s.parentNode.insertBefore(t, s);
-        }
-      }
-      
-      window.fbq('init', PIXEL_ID);
-      window.fbq('track', 'PageView');
-    }
+    trackProgramPageView('dakiraty');
 
     return () => {
         // Cleanup preload link on unmount if needed, though usually harmless to leave
